@@ -1,0 +1,30 @@
+version: '2'
+services:
+  node-server:
+    image: node:6-slim
+    container_name: node-server
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/src/
+    networks:
+      mean-network:
+    working_dir: /src
+    command: npm run start
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      mean-network:
+
+volumes:
+  mongo-data:
+    driver: local
+
+networks:
+  mean-network:

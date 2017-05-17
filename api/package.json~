@@ -1,0 +1,24 @@
+{
+  "name": "uv_mean",
+  "version": "1.0.0",
+  "description": "UV ETNA BACHELOR : Learn Mean Basics",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon src/server.js",
+  },
+  "keywords": [
+    "ETNA",
+    "Bachelor",
+    "MEAN"
+  ],
+  "author": "faje",
+  "license": "MIT",
+  "dependencies": {
+    "express": "4.15.2",
+    "mongoose": "4.9.7"
+  },
+  "devDependencies": {
+    "nodemon": "1.11.0"
+  }
+}
