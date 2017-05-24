@@ -48,13 +48,13 @@ docker-conpose up -d
 
 ## Import database from crime*.csv :
 
-- For enter in container mongo :
+- To enter in container mongo :
 
 ```bash
 docker exec -it mongo bash
 ```
 
-- For import database :
+- To import database :
 
 ```bash
 mongoimport -h 127.0.0.1:27017 -d mean -c crime_incident_reports --file crime_incident_reports.datadump-2.csv --type csv --headerline
