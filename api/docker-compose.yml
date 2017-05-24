@@ -4,7 +4,7 @@ services:
     image: node:6-slim
     container_name: node-server
     ports:
-      - 3000:3000
+      - 3001:3001
     volumes:
       - .:/src/
     networks:
