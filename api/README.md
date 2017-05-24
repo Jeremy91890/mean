@@ -44,3 +44,18 @@ docker-conpose up -d
 
 - Lance les deux server mais en mode detache, rien ne s'affiche sur la sortie standard.
   Vous avez la possibilite d'inspecter les logs avec la commande "docker logs container_name "
+
+
+## Import database from crime*.csv :
+
+- For enter in container mongo :
+
+```bash
+docker exec -it mongo bash
+```
+
+- For import database :
+
+```bash
+mongoimport -h 127.0.0.1:27017 -d mean -c crime_incident_reports --file crime_incident_reports.datadump-2.csv --type csv --headerline
+```
