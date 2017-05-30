@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import Layout from './Layout/LayoutRouter.jsx';
+import Router from './Router/Router.jsx';
 
 class App extends Component {
     render() {
         return (
             <MuiThemeProvider>
                 <div className="mainContainer">
-                    <Layout/>
+                    <Router/>
                 </div>
             </MuiThemeProvider>
         );

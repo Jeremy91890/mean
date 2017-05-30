@@ -9,22 +9,22 @@ const styles = {
     }
 }
 
-class PrivatePage extends Component {
+class AdminPage extends Component {
     constructor(props) {
         super(props);
     }
     render() {
         return (
             <div>
-            <Card style={styles.main} zDepth={1}>
-                <CardTitle title="Private page" />
-                <CardText>
-                Need login to access this
-                </CardText>
-            </Card>
+                <Card style={styles.main} zDepth={1}>
+                    <CardTitle title="Private page" />
+                    <CardText>
+                        Ici page d'admin des users
+                    </CardText>
+                </Card>
             </div>
         )       
     }
 }
 
-export default PrivatePage;
+export default AdminPage;

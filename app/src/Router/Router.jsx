@@ -9,9 +9,9 @@ import {
   Switch
 } from 'react-router-dom'
 
-import HomePage from '../Pages/HomePage.jsx'
 import AboutPage from '../Pages/AboutPage.jsx'
-import PrivatePage from '../Pages/PrivatePage.jsx'
+import HomePage from '../Pages/HomePage.jsx'
+import AdminPage from '../Pages/AdminPage.jsx'
 import PleaseLoginPage from '../Pages/PleaseLoginPage.jsx'
 import NoMatchPage from '../Pages/NoMatchPage.jsx'
 
@@ -141,10 +141,8 @@ class Layout extends Component {
 
     render() {
         //check credentials for private page access
-        var _PrivatePage = this.checkPrivatePageAccess("PRIVPAGE1") ? PrivatePage : PleaseLoginPage
-        /*<FlatButton>
-        <NavLink style={styles.navLink} to="/about"> About </NavLink>
-        </FlatButton>*/
+        var _PrivatePage = this.checkPrivatePageAccess("PRIVPAGE1") ? AdminPage : PleaseLoginPage
+        
         return (
             <Router>
                 <div style={styles.appContainer}>
