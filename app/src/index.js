@@ -1,9 +1,23 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import Layout from './Layout/LayoutRouter.jsx';
+
+class App extends Component {
+    render() {
+        return (
+            <MuiThemeProvider>
+                <div className="mainContainer">
+                    <Layout/>
+                </div>
+            </MuiThemeProvider>
+        );
+    }
+}
 
 ReactDOM.render(
-  <App />,
-  document.getElementById('root')
+    <App />,
+    document.getElementById('app')
 );

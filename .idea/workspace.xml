@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cb4c289d-e8b3-4be4-bcb0-0fc3667f1b4b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/src/models/models.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/api/src/routes/crimesRoutes.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/api/mongo-data/diagnostic.data/metrics.interim" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/api/mongo-data/journal/WiredTigerLog.0000000004" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/api/src/models/model.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/api/src/routes/routes.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/mongo-data/WiredTiger.wt" afterPath="$PROJECT_DIR$/api/mongo-data/WiredTiger.wt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/mongo-data/_mdb_catalog.wt" afterPath="$PROJECT_DIR$/api/mongo-data/_mdb_catalog.wt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/mongo-data/collection-0--3321098258292278117.wt" afterPath="$PROJECT_DIR$/api/mongo-data/collection-0--3321098258292278117.wt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/mongo-data/diagnostic.data/metrics.2017-05-24T14-14-43Z-00000" afterPath="$PROJECT_DIR$/api/mongo-data/diagnostic.data/metrics.2017-05-24T14-14-43Z-00000" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/mongo-data/index-1--3321098258292278117.wt" afterPath="$PROJECT_DIR$/api/mongo-data/index-1--3321098258292278117.wt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/mongo-data/mongod.lock" afterPath="$PROJECT_DIR$/api/mongo-data/mongod.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/mongo-data/sizeStorer.wt" afterPath="$PROJECT_DIR$/api/mongo-data/sizeStorer.wt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/mongo-data/WiredTiger.turtle" afterPath="$PROJECT_DIR$/api/mongo-data/WiredTiger.turtle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/api/src/server.js" afterPath="$PROJECT_DIR$/api/src/server.js" />
-    </list>
+    <list default="true" id="cb4c289d-e8b3-4be4-bcb0-0fc3667f1b4b" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +16,7 @@
         <entry file="file://$PROJECT_DIR$/api/src/server.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="459">
-              <caret line="27" column="30" lean-forward="true" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
+              <caret line="27" column="30" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -43,7 +26,7 @@
         <entry file="file://$PROJECT_DIR$/api/src/routes/crimesRoutes.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
-              <caret line="3" column="57" lean-forward="true" selection-start-line="3" selection-start-column="57" selection-end-line="3" selection-end-column="57" />
+              <caret line="3" column="57" lean-forward="false" selection-start-line="3" selection-start-column="57" selection-end-line="3" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -52,8 +35,8 @@
       <file leaf-file-name="authRoutes.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/src/routes/authRoutes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="24" column="61" lean-forward="true" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
+            <state relative-caret-position="408">
+              <caret line="24" column="61" lean-forward="false" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -130,9 +113,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -812,14 +795,16 @@
       <workItem from="1495733818229" duration="4832000" />
       <workItem from="1496059012966" duration="19000" />
       <workItem from="1496068758723" duration="13103000" />
+      <workItem from="1496134572072" duration="14000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32788000" />
+    <option name="totallyTimeSpent" value="32802000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1922" height="986" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -873,10 +858,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/src/models/models.js">
+    <entry file="file://$PROJECT_DIR$/api/src/routes/crimesRoutes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="52" lean-forward="false" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
+        <state relative-caret-position="51">
+          <caret line="3" column="57" lean-forward="true" selection-start-line="3" selection-start-column="57" selection-end-line="3" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/src/routes/authRoutes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="61" lean-forward="true" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
           <folding />
         </state>
       </provider>
@@ -893,7 +886,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="9" column="52" lean-forward="false" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/src/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/src/models/models.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="52" lean-forward="false" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
         </state>
       </provider>
     </entry>
@@ -1002,38 +1009,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="25" column="2" lean-forward="false" selection-start-line="25" selection-start-column="2" selection-end-line="25" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/src/routes/routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="2" lean-forward="true" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/src/utils/crimesUtils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/src/utils/usersUtils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="11" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/api/src/routes/routes.js" />
+    <entry file="file://$PROJECT_DIR$/api/src/utils/crimesUtils.js" />
+    <entry file="file://$PROJECT_DIR$/api/src/utils/usersUtils.js" />
     <entry file="file://$PROJECT_DIR$/api/src/routes/authRoutes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="24" column="61" lean-forward="true" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
+        <state relative-caret-position="408">
+          <caret line="24" column="61" lean-forward="false" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
           <folding />
         </state>
       </provider>
@@ -1041,7 +1026,7 @@
     <entry file="file://$PROJECT_DIR$/api/src/routes/crimesRoutes.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
-          <caret line="3" column="57" lean-forward="true" selection-start-line="3" selection-start-column="57" selection-end-line="3" selection-end-column="57" />
+          <caret line="3" column="57" lean-forward="false" selection-start-line="3" selection-start-column="57" selection-end-line="3" selection-end-column="57" />
           <folding />
         </state>
       </provider>
@@ -1049,7 +1034,7 @@
     <entry file="file://$PROJECT_DIR$/api/src/server.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
-          <caret line="27" column="30" lean-forward="true" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
+          <caret line="27" column="30" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
           <folding />
         </state>
       </provider>
