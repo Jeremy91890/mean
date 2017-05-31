@@ -9,4 +9,12 @@ module.exports = function(app) {
         });
     });
 
+    app.get('/crimes/geHundredtLatestCrimes', function (req, res) {
+        Crime.find(function (err, crimes) {
+            if (err)
+                res.json({success: false, message: err});
+            res.json({success: true, crimes: crimes});
+        }).sort({'fromdate': -1}).limit(100);
+    });
+
 };

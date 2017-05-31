@@ -26,6 +26,7 @@ import {postData, getData} from './Utils/requestUtils.js';
 
 //Api endpoint config
 import api_ip_conf from './config.js';
+
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 

@@ -77,7 +77,6 @@ class LoginPage extends Component {
             'Accept': 'application/json',
             'Content-Type': 'application/json'};
         var data = JSON.stringify({"email":this.state.email, "password":this.state.password});
-        console.log(API)
         postData(API, headers, data , this.processResponseLogin)
     }
 
