@@ -39,7 +39,7 @@ module.exports = function(app) {
                     var token = createToken();
                     authorizedUsers.push({token: token, email: user.email, role: user.role, validated: user.validated});
                     // return the information including token as JSON
-                    res.json({success: true, token: token});
+                    res.json({success: true, token: token, role: user.role});
                 }
             }
         });

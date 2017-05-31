@@ -78,19 +78,19 @@ class LoginPage extends Component {
 
     processResponseLogin(resp) {
         this.setState({displayLoadingProcessLogin: false});
-        if (resp['responseJSON'] != undefined) {
-            resp = resp['responseJSON'];
-            if (resp['success'] == true) {
+        if (resp.responseJSON != undefined) {
+            resp = resp.responseJSON;
+            if (resp.success == true) {
                 //changer le role celon de resp de l'api
-                localStorage.setItem('authToken', resp['token']);
-                this.setState({userLogged: true, userRole: 0});
+                localStorage.setItem('authToken', resp.token);
+                this.setState({userLogged: true, userRole: resp.role});
                 var props = {userLogged: this.state.userLogged, userRole: this.state.userRole};
                 this.props.onChange(props);
             }
             else {
                 localStorage.setItem('authToken', null);
                 localStorage.setItem('email', null);
-                this.setState({showSnackBar: true, messageSnackBar: resp['message']});
+                this.setState({showSnackBar: true, messageSnackBar: resp.message});
             }
         }
     }

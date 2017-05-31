@@ -26,8 +26,8 @@ class Rooter extends Component {
             userRole: 3 //userRole: 0=Chef, 1=Detect, 2=Normal, 3=notLogged
         };
 
-        this.login = this.login.bind(this);
-        this.logout = this.logout.bind(this);
+        //this.login = this.login.bind(this);
+        //this.logout = this.logout.bind(this);
     }
     
     componentWillMount(){
@@ -52,19 +52,19 @@ class Rooter extends Component {
     }
 
     // Faking login / logout
-    login(){
+    /*login(){
         //console.log("Login !")
         this.setState({ userLogged : true })
-    }
+    }*/
 
     // Faking login / logout
-    logout(){
+    /*logout(){
         //console.log("Logout !")
         this.setState({ userLogged : false })
-    }
+    }*/
 
     // Checking current users credentials
-    checkNormalPageAccess(){
+    checkNormalPageAccess() {
         //check user's token ...
         //faking it 
         return this.state.userLogged
@@ -78,9 +78,21 @@ class Rooter extends Component {
         return false;
     }
 
+    onChangeLoginPage(props) {
+        this.setState({userLogged: props.userLogged, userRole: props.userRole})
+    }
+
     render() {
+        const _LoginPage = (props) => {
+            return (
+                <LoginPage
+                    onChange={this.onChangeLoginPage.bind(this)}
+                    {...props}
+                />
+            );
+        }
         //check credentials for private page access
-        var _HomePage = this.checkNormalPageAccess() ? HomePage : LoginPage;
+        var _HomePage = this.checkNormalPageAccess() ? HomePage : _LoginPage;
         var _PrivatePage = this.checkAdminPageAccess() ? AdminPage : _HomePage;
 
         return (
