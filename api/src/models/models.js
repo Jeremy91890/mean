@@ -15,7 +15,7 @@ var UserSchema = mongoose.Schema({
     _id: String,
     email: String,
     password: String,
-    role: Boolean,
+    role: Number,
     validated: Boolean
 }, {collection: 'users'});
 var UserModel = mongoose.model('User', UserSchema);

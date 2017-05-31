@@ -49,8 +49,8 @@ class LoginPage extends Component {
             userLogged: false,
             userRole: false,
 
-            email: "",
-            password: "",
+            email: "ggi@etna.com",
+            password: "pass",
             showSnackBar: false,
             messageSnackBar: "",
             displayLoadingProcessLogin: false,
