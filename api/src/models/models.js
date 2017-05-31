@@ -7,7 +7,29 @@ const Schema = mongoose.Schema;
 
 
 //Schema - Crime
-var CrimeSchema = mongoose.Schema({}, {collection: 'crime_incident_reports'});
+var CrimeSchema = mongoose.Schema({
+	compnos: String,
+	naturecode: String,
+    incident_type_description: String,
+    main_crimecode: String,
+    reptdistrict: String,
+    reportingarea: Number,
+    fromdate: Date,
+    weapontype: String,
+    shooting: Boolean,
+    domestic: Boolean,
+    shift: String,
+    year: Number,
+    month: Number,
+    day_week: String,
+    ucrpart: String,
+    x: Number,
+    y: Number,
+    streetname: String,
+    xstreetname: String,
+    location: String
+},
+ {collection: 'crime_incident_reports'});
 var CrimeModel = mongoose.model('Crime', CrimeSchema);
 
 //Schema - User
