@@ -10,7 +10,7 @@ module.exports = function(app) {
     });
 
     app.post('/users/addUser', function (req, res) {
-        let newUser = new User();
+        var newUser = new User();
 
         newUser.email = req.body.email;
         newUser.password = req.body.password;
@@ -30,16 +30,16 @@ module.exports = function(app) {
             userToValidate.save();
             if (err)
                 res.json({success: false, message: err});
+            res.json({success: true, message: "User validated"});
         });
-        res.json({success: true, message: "User validated"});
     });
 
     app.post('/users/deleteUser', function (req, res) {
         User.remove({ email: req.body.email }, function (err, userToDel) {
             if (err)
                 res.json({success: false, message: err});
+            res.json({success: true, message: "User deleted"});
         });
-        res.json({success: true, message: "User deleted"});
     });
 
 };
