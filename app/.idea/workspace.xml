@@ -27,8 +27,8 @@
       <file leaf-file-name="LoginPage.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Pages/LoginPage.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="387">
-              <caret line="71" column="41" lean-forward="true" selection-start-line="71" selection-start-column="41" selection-end-line="71" selection-end-column="41" />
+            <state relative-caret-position="319">
+              <caret line="85" column="40" lean-forward="true" selection-start-line="85" selection-start-column="40" selection-end-line="85" selection-end-column="40" />
               <folding>
                 <element signature="e#61#101#0" expanded="true" />
               </folding>
@@ -779,12 +779,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1496214551364</updated>
-      <workItem from="1496214553390" duration="7537000" />
+      <workItem from="1496214553390" duration="7971000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7537000" />
+    <option name="totallyTimeSpent" value="7971000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="0" width="1922" height="986" extended-state="6" />
@@ -892,8 +892,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Pages/LoginPage.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="71" column="41" lean-forward="true" selection-start-line="71" selection-start-column="41" selection-end-line="71" selection-end-column="41" />
+        <state relative-caret-position="319">
+          <caret line="85" column="40" lean-forward="true" selection-start-line="85" selection-start-column="40" selection-end-line="85" selection-end-column="40" />
           <folding>
             <element signature="e#61#101#0" expanded="true" />
           </folding>
