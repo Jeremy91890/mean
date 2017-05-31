@@ -22,7 +22,7 @@ checkToken = function (token) {
 
 module.exports = function(app) {
 
-    app.post('/users/checkCredentials', function (req, res) {
+    app.post('/auth/checkCredentials', function (req, res) {
         User.findOne({email: req.body.email}, function(err, user) {
             if (err) throw err;
             if (!user) {
@@ -45,7 +45,7 @@ module.exports = function(app) {
         });
     });
 
-    app.post('/users/deleteToken', function (req, res) {
+    app.post('/auth/deleteToken', function (req, res) {
 
         for (var row in authorizedUsers) {
             if (row.token == req.body.token) {

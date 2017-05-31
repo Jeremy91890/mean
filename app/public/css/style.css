@@ -2,47 +2,6 @@ body {
     margin: 0px;
 }
 
-.mainContainer {
-    min-height: 800px;
-}
-
 .container {
-    margin: 15px;
+    margin: 0px;
 }
-
-.paper-result {
-}
-@media only screen and (max-width: 997px) {
-    .paper-result {
-        margin-top: 15px;
-    }
-}
-
-.subtitle-grid {
-    font-size: 14px;
-}
-@media only screen and (max-width: 370px) {
-    .subtitle-grid {
-        font-size: 12px;
-    }
-}
-
-.descriptionResult {
-    font-size: 16px;
-    text-align: center;
-}
-@media only screen and (max-width: 340px) {
-    .descriptionResult {
-        font-size: 14px;
-    }
-}
-
-.separatorBr {
-    display: none;
-}
-@media only screen and (max-width: 590px) {
-    [class*="separatorBr"] { display: inline; }
-    [class*="separatorPipe"] { display: none; }
-}
-
-
