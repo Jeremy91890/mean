@@ -1,6 +1,6 @@
 import $ from 'jquery'
 
-exports.postData = function(_url, _headers, _body,_callback) {
+function postData(_url, _headers, _body,_callback) {
     $.ajax({
         type: "POST",
         headers: _headers,
@@ -11,7 +11,7 @@ exports.postData = function(_url, _headers, _body,_callback) {
     });
 }
 
-exports.getData = function(_url, _headers, _callback) {
+function getData(_url, _headers, _callback) {
     $.ajax({
         type: "GET",
         headers: _headers,
@@ -20,3 +20,5 @@ exports.getData = function(_url, _headers, _callback) {
         dataType: "json"
     });
 }
+
+export {postData, getData};

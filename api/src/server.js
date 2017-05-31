@@ -17,6 +17,12 @@ db.once('open', function callback(){
    console.log("Connection with database succeeded");
 });
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 //Import routes
 require('./routes/crimesRoutes')(app);
 require('./routes/authRoutes')(app);
