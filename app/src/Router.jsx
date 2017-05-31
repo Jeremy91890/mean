@@ -9,14 +9,35 @@ import {
   Switch
 } from 'react-router-dom'
 
-import AboutPage from './Pages/AboutPage.jsx'
+import AppBar from 'material-ui/AppBar';
+import IconMenu from 'material-ui/IconMenu';
+import IconButton from 'material-ui/IconButton';
+import MenuItem from 'material-ui/MenuItem';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import {blue500, blue600, red800, white} from 'material-ui/styles/colors';
+
 import HomePage from './Pages/HomePage.jsx'
 import AdminPage from './Pages/AdminPage.jsx'
 import LoginPage from './Pages/LoginPage.jsx'
 import NoMatchPage from './Pages/NoMatchPage.jsx'
 
+//http utils for request post, get ...
+import {postData, getData} from './Utils/requestUtils.js';
+
+//Api endpoint config
+import api_ip_conf from './config.js';
+
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
+
+const API_IP = api_ip_conf.endpoint;
+
+const style = {
+    appBar: {
+        backgroundColor: blue500
+    }
+}
+
 
 class Rooter extends Component {
     constructor(props) {
@@ -26,8 +47,7 @@ class Rooter extends Component {
             userRole: 3 //userRole: 0=Chef, 1=Detect, 2=Normal, 3=notLogged
         };
 
-        //this.login = this.login.bind(this);
-        //this.logout = this.logout.bind(this);
+        this.logout = this.logout.bind(this);
     }
     
     componentWillMount(){
@@ -51,17 +71,23 @@ class Rooter extends Component {
         return [app,doc]
     }
 
-    // Faking login / logout
-    /*login(){
-        //console.log("Login !")
-        this.setState({ userLogged : true })
-    }*/
+    logout(){
+        var token = localStorage.getItem('authToken');
+        var API = API_IP + "/auth/deleteToken";
+        var headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'};
+        var data = JSON.stringify({"token":token});
+        postData(API, headers, data , this.processResponseLogout)
+        localStorage.setItem('authToken',null);
+        localStorage.setItem('email',null);
+        this.setState({userLogged: false});
+    }
 
-    // Faking login / logout
-    /*logout(){
-        //console.log("Logout !")
-        this.setState({ userLogged : false })
-    }*/
+    processResponseLogout(resp) {
+        resp = resp.responseJSON;
+        console.log(resp);
+    }
 
     // Checking current users credentials
     checkNormalPageAccess() {
@@ -72,8 +98,10 @@ class Rooter extends Component {
 
     // Checking if user is admin
     checkAdminPageAccess() {
-        if (this.state.userRole == 0) {
-            return true;
+        if (this.state.userLogged == true) {
+            if (this.state.userRole == 0) {
+                return true;
+            }
         }
         return false;
     }
@@ -93,18 +121,36 @@ class Rooter extends Component {
         }
         //check credentials for private page access
         var _HomePage = this.checkNormalPageAccess() ? HomePage : _LoginPage;
-        var _PrivatePage = this.checkAdminPageAccess() ? AdminPage : _HomePage;
+        var _AdminPage = this.checkAdminPageAccess() ? AdminPage : _HomePage;
 
         return (
             <Router>
                 <div>
-                    <Switch>
-                        <Route exact path="/" component={_HomePage}/>
-                        <Route path="/about" component={AboutPage}/>
-                        <Redirect from="/about1" to="/about"/>
-                        <Route path="/private" component={_PrivatePage}/>
-                        <Route component={HomePage}/>
-                    </Switch>
+                    {
+                        this.state.userLogged
+                            ?
+                            <AppBar
+                                style={style.appBar}
+                                iconElementLeft={<b>Logo</b>}
+                                title="Titre"
+                                iconElementRight={
+                                    <IconMenu iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}>
+                                        <NavLink to="/"><MenuItem primaryText="Home"/></NavLink>
+                                        {this.state.userRole == 0 ? <NavLink to="/admin"><MenuItem primaryText="Admin"/></NavLink> : null}
+                                        <NavLink to="/"><MenuItem primaryText="Logout" onTouchTap={this.logout}/></NavLink>
+                                    </IconMenu>
+                                }
+                            />
+                            :
+                            null
+                    }
+                    <div>
+                        <Switch>
+                            <Route exact path="/" component={_HomePage}/>
+                            <Route path="/admin" component={_AdminPage}/>
+                            <Route component={_HomePage}/>
+                        </Switch>
+                    </div>
                 </div>
             </Router>
         )
