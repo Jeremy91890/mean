@@ -28,7 +28,7 @@ require('./routes/crimesRoutes')(app);
 require('./routes/authRoutes')(app);
 
 app.get('/', function(req, res) {
-    res.send("Hello Etna's !");
+    res.send("Hello Etna's");
 });
 
 app.listen(3001, function () {
