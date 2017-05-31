@@ -1,6 +1,10 @@
 module.exports = function(app) {
     const User = require('../models/models').UserModel;
 
+    //
+    //  GET all users
+    //
+
     app.get('/users/getAllUsers', function (req, res) {
         User.find(function (err, users) {
             if (err)
@@ -8,6 +12,10 @@ module.exports = function(app) {
             res.json({success: true, users: users});
         });
     });
+
+    //
+    // ADD User
+    //
 
     app.post('/users/addUser', function (req, res) {
         var newUser = new User();
@@ -24,6 +32,10 @@ module.exports = function(app) {
         });
     });
 
+    //
+    // VALIDATE User
+    //
+
     app.post('/users/validateUser', function (req, res) {
         User.findOne({ email: req.body.email }, function (err, userToValidate) {
             userToValidate.validated = true;
@@ -33,6 +45,10 @@ module.exports = function(app) {
             res.json({success: true, message: "User validated"});
         });
     });
+
+    //
+    // DELETE User
+    //
 
     app.post('/users/deleteUser', function (req, res) {
         User.remove({ email: req.body.email }, function (err, userToDel) {

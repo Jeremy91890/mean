@@ -12,7 +12,7 @@ var CrimeModel = mongoose.model('Crime', CrimeSchema);
 
 //Schema - User
 var UserSchema = mongoose.Schema({
-    _id: String,
+   // _id: String,
     email: String,
     password: String,
     role: Number,
