@@ -39,6 +39,11 @@ const style = {
         width: "100%",
         textAlign: "center",
         margin: 3
+    },
+    styleLinearProgress: {
+        borderRadius: 0,
+        position: "absolute",
+        bottom: 0
     }
 };
 
@@ -72,7 +77,6 @@ class LoginPage extends Component {
             'Accept': 'application/json',
             'Content-Type': 'application/json'};
         var data = JSON.stringify({"email":this.state.email, "password":this.state.password});
-        console.log(API)
         postData(API, headers, data , this.processResponseLogin)
     }
 
@@ -176,7 +180,7 @@ class LoginPage extends Component {
                                     ?
                                     <LinearProgress mode="indeterminate"
                                                     color={blue500}
-                                                    style={{borderRadius: 0, position: "absolute", bottom: 0}}/>
+                                                    style={style.styleLinearProgress}/>
                                     :
                                     null
                             }
