@@ -46,13 +46,12 @@ module.exports = function(app) {
     });
 
     app.post('/auth/deleteToken', function (req, res) {
-
         for (var row in authorizedUsers) {
-            if (row.token == req.body.token) {
-                //supp row de authorizedToken
-                //res.json({success: true, message: "token deleted"})
+            if (authorizedUsers[row].token == req.body.token) {
+                authorizedUsers.splice(row, 1);
+                res.json({success: true, message: "token deleted"});
             }
         }
-        //res.json({success: false, message: "token not exist"})
+        res.json({success: false, message: "token not exist"});
     });
 };
