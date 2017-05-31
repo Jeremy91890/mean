@@ -9,12 +9,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 //Init mongodb
-mongoose.connect('mongodb://mongo:27017/mean');
-var db = mongoose.connection;
+// mongoose.connect('mongodb://mongo:27017/mean');
+// var db = mongoose.connection;
 
-db.on('error', console.error.bind(console, 'connection error'));
-db.once('open', function callback(){
-   console.log("Connection with database succeeded");
+// db.on('error', console.error.bind(console, 'connection error'));
+// db.once('open', function callback(){
+//    console.log("Connection with database succeeded");
+// });
+
+mongoose.Promise = require('bluebird');
+mongoose.connect('mongodb://mongo:27017/mean', {server: { poolSize: 5 }});
+var conn = mongoose.connection;
+
+conn.once('open', function ()
+{
+    console.log('Connection with database succeeded');
 });
 
 app.use(function(req, res, next) {
