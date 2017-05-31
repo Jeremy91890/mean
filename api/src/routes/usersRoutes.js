@@ -15,7 +15,7 @@ module.exports = function(app) {
         newUser.email = req.body.email;
         newUser.password = req.body.password;
         newUser.role = req.body.role;
-        newUser.validated = 0;
+        newUser.validated = false;
 
         newUser.save(function(err){
             if (err)
@@ -26,7 +26,7 @@ module.exports = function(app) {
 
     app.post('/users/validateUser', function (req, res) {
         User.findOne({ email: req.body.email }, function (err, userToValidate) {
-            userToValidate.validated = 1;
+            userToValidate.validated = true;
             userToValidate.save();
             if (err)
                 res.json({success: false, message: err});

@@ -26,6 +26,7 @@ app.use(function(req, res, next) {
 //Import routes
 require('./routes/crimesRoutes')(app);
 require('./routes/authRoutes')(app);
+//require('./routes/usersRoutes')(app);
 
 app.get('/', function(req, res) {
     res.send("Hello Etna's");
