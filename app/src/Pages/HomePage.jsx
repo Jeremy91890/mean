@@ -31,6 +31,8 @@ class HomePage extends Component {
             allCrimes: null,
         }
         this.processResponseGetAllCrimes = this.processResponseGetAllCrimes.bind(this);
+
+        this.onHandleCellSelectionCrime = this.onHandleCellSelectionCrime.bind(this);
     }
 
     componentWillMount(){
@@ -51,13 +53,23 @@ class HomePage extends Component {
         console.log(resp)
     }
 
+    onHandleCellSelectionCrime(key) {
+        console.log(key);
+        console.log(this.state.allCrimes[key]._id)
+        //Ici appel route get one crime by id
+        //renvoi dans un processResponce
+        //pour afficher modal crime avec info
+    }
+
     render() {
         return (
             <div>
                 {
                     this.state.allCrimes != null
                         ?
-                        <Table>
+                        <Table
+                            onRowSelection={this.onHandleCellSelectionCrime}
+                        >
                             <TableHeader
                                 displaySelectAll={false}
                             >
@@ -71,8 +83,8 @@ class HomePage extends Component {
                             <TableBody
                                 displayRowCheckbox={false}
                             >
-                                {this.state.allCrimes.map( (row) => (
-                                    <TableRow key={row._id}>
+                                {this.state.allCrimes.map( (row, i) => (
+                                    <TableRow key={i} value={row._id}>
                                         <TableRowColumn>{row.naturecode}</TableRowColumn>
                                         <TableRowColumn>{row.incident_type_description}</TableRowColumn>
                                         <TableRowColumn>{row.weapontype}</TableRowColumn>
