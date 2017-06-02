@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import CrimesMap from '../Components/CrimesMap.jsx';
 
 import {
     Table,
@@ -21,41 +22,40 @@ import api_ip_conf from '../config.js';
 const API_IP = api_ip_conf.endpoint;
 
 const styles = {
-
 };
 
 class HomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            allCrimes: null,
+            latestCrimes: null,
         }
-        this.processResponseGetAllCrimes = this.processResponseGetAllCrimes.bind(this);
+        this.processResponseGeHundredtLatestCrimes = this.processResponseGeHundredtLatestCrimes.bind(this);
 
         this.onHandleCellSelectionCrime = this.onHandleCellSelectionCrime.bind(this);
     }
 
     componentWillMount(){
-        this.getAllCrimes();
+       this.geHundredtLatestCrimes();
     }
 
-    getAllCrimes(){
+    geHundredtLatestCrimes(){
         var API = API_IP + "/crimes/geHundredtLatestCrimes";
         var headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json'};
-        getData(API, headers, this.processResponseGetAllCrimes)
+        getData(API, headers, this.processResponseGeHundredtLatestCrimes)
     }
 
-    processResponseGetAllCrimes(resp) {
+    processResponseGeHundredtLatestCrimes(resp) {
         resp = resp.responseJSON;
-        this.setState({allCrimes: resp.crimes});
+        this.setState({latestCrimes: resp.crimes});
         console.log(resp)
     }
 
     onHandleCellSelectionCrime(key) {
         console.log(key);
-        console.log(this.state.allCrimes[key]._id)
+        console.log(this.state.latestCrimes[key]._id)
         //Ici appel route get one crime by id
         //renvoi dans un processResponce
         //pour afficher modal crime avec info
@@ -65,37 +65,11 @@ class HomePage extends Component {
         return (
             <div>
                 {
-                    this.state.allCrimes != null
-                        ?
-                        <Table
-                            onRowSelection={this.onHandleCellSelectionCrime}
-                        >
-                            <TableHeader
-                                displaySelectAll={false}
-                            >
-                                <TableRow>
-                                    <TableHeaderColumn>Naturecode</TableHeaderColumn>
-                                    <TableHeaderColumn>Description</TableHeaderColumn>
-                                    <TableHeaderColumn>Weapon Type</TableHeaderColumn>
-                                    <TableHeaderColumn>Date</TableHeaderColumn>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody
-                                displayRowCheckbox={false}
-                            >
-                                {this.state.allCrimes.map( (row, i) => (
-                                    <TableRow key={i} value={row._id}>
-                                        <TableRowColumn>{row.naturecode}</TableRowColumn>
-                                        <TableRowColumn>{row.incident_type_description}</TableRowColumn>
-                                        <TableRowColumn>{row.weapontype}</TableRowColumn>
-                                        <TableRowColumn>{row.fromdate}</TableRowColumn>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                        :
-                        null
-
+                    this.state.latestCrimes != null
+                    ?
+                    <CrimesMap latestCrimes={this.state.latestCrimes}/>
+                    :
+                    <p>Chargement</p>
                 }
             </div>
         )
