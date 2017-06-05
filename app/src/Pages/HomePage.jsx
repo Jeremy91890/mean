@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import CrimesMap from '../Components/CrimesMap.jsx';
 
 import {
@@ -25,10 +26,10 @@ const styles = {
 };
 
 class HomePage extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
-            latestCrimes: null,
+            crimeToDisplay: null,
         }
         this.processResponseGeHundredtLatestCrimes = this.processResponseGeHundredtLatestCrimes.bind(this);
 
@@ -49,13 +50,13 @@ class HomePage extends Component {
 
     processResponseGeHundredtLatestCrimes(resp) {
         resp = resp.responseJSON;
-        this.setState({latestCrimes: resp.crimes});
+        this.setState({crimeToDisplay: resp.crimes});
         console.log(resp)
     }
 
     onHandleCellSelectionCrime(key) {
         console.log(key);
-        console.log(this.state.latestCrimes[key]._id)
+        console.log(this.state.crimeToDisplay[key]._id)
         //Ici appel route get one crime by id
         //renvoi dans un processResponce
         //pour afficher modal crime avec info
@@ -65,9 +66,9 @@ class HomePage extends Component {
         return (
             <div>
                 {
-                    this.state.latestCrimes != null
+                    this.state.crimeToDisplay != null
                     ?
-                    <CrimesMap latestCrimes={this.state.latestCrimes}/>
+                    <CrimesMap crimeToDisplay={this.state.crimeToDisplay}/>
                     :
                     <p>Chargement</p>
                 }
@@ -75,5 +76,6 @@ class HomePage extends Component {
         )
     }
 }
+
 
 export default HomePage;
