@@ -3,6 +3,17 @@ import { withGoogleMap, GoogleMap, Marker, Map, InfoWindow } from 'google-maps-r
 
 import CrimeModal from './CrimeModal.jsx';
 
+import {
+    Table,
+    TableBody,
+    TableFooter,
+    TableHeader,
+    TableHeaderColumn,
+    TableRow,
+    TableRowColumn,
+} from 'material-ui/Table';
+import {Container, Row, Col} from 'react-grid-system';
+
 //http utils for request post, get ...
 import {postData, getData} from '../Utils/requestUtils.js';
 
@@ -95,22 +106,52 @@ class CrimesMap extends Component {
     render() {
         return (
             <div>
-               <Map google={window.google} style={styles.CrimesMap}
-                onClick={this.onMapClicked}
-                initialCenter= {{lat: 42.3250286936206,lng: -71.0734144739058}}
-                zoom={12}>
-                    {this.state.crimeToDisplay.map( (row) => (
-                        <Marker
-                            key={row._id}
-                            value={row._id}
-                            title={row.naturecode}
-                            name={row.incident_type_description}
-                            position={{lat: this.extractLat(row.location), lng: this.extractLng(row.location)}}
-                            onClick={this.onMarkerClick}>
-                        </Marker>
-                    ))}
-                    <CrimeModal selectedCrimeFull={this.state.selectedCrimeFull} openCrimeModal={this.state.openCrimeModal}/>
-                </Map>
+                <Row>
+                    <Col lg={3}>
+                    <Table>
+                        <TableHeader
+                            displaySelectAll={false}
+                        >
+                            <TableRow>
+                                <TableHeaderColumn>Naturecode</TableHeaderColumn>
+                                <TableHeaderColumn>Description</TableHeaderColumn>
+                                <TableHeaderColumn>Weapon Type</TableHeaderColumn>
+                                <TableHeaderColumn>Date</TableHeaderColumn>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody
+                            displayRowCheckbox={false}
+                        >
+                            {this.state.crimeToDisplay.map( (row) => (
+                                <TableRow key={row._id}>
+                                    <TableRowColumn>{row.naturecode}</TableRowColumn>
+                                    <TableRowColumn>{row.incident_type_description}</TableRowColumn>
+                                    <TableRowColumn>{row.weapontype}</TableRowColumn>
+                                    <TableRowColumn>{row.fromdate}</TableRowColumn>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                    </Col>
+                    <Col lg={9}>
+                        <Map google={window.google} style={styles.CrimesMap}
+                            onClick={this.onMapClicked}
+                            initialCenter= {{lat: 42.3250286936206,lng: -71.0734144739058}}
+                            zoom={12}>
+                                {this.state.crimeToDisplay.map( (row) => (
+                                    <Marker
+                                        key={row._id}
+                                        value={row._id}
+                                        title={row.naturecode}
+                                        name={row.incident_type_description}
+                                        position={{lat: this.extractLat(row.location), lng: this.extractLng(row.location)}}
+                                        onClick={this.onMarkerClick}>
+                                    </Marker>
+                                ))}
+                            <CrimeModal selectedCrimeFull={this.state.selectedCrimeFull} openCrimeModal={this.state.openCrimeModal}/>
+                        </Map>
+                    </Col>
+                </Row>
             </div>
         )
     }

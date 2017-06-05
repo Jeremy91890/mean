@@ -2,15 +2,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import CrimesMap from '../Components/CrimesMap.jsx';
 
-import {
-    Table,
-    TableBody,
-    TableFooter,
-    TableHeader,
-    TableHeaderColumn,
-    TableRow,
-    TableRowColumn,
-} from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 
