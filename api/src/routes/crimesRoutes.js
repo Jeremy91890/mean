@@ -64,6 +64,10 @@ module.exports = function(app) {
 		});
     });
   
+  //
+  // Get 100 latest crimes
+  //
+
     app.get('/crimes/geHundredtLatestCrimes', function (req, res) {
         Crime.find(function (err, crimes) {
             if (err)
@@ -72,4 +76,15 @@ module.exports = function(app) {
         }).sort({'fromdate': -1}).limit(100);
     });
 
+  //
+  // Get 100 oldest crimes
+  //
+
+      app.get('/crimes/geHundredtOldestCrimes', function (req, res) {
+        Crime.find(function (err, crimes) {
+            if (err)
+                res.json({success: false, message: err});
+            res.json({success: true, crimes: crimes});
+        }).sort({'fromdate': 1}).limit(100);
+    });
 };
