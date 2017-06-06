@@ -19,6 +19,7 @@ import {blue500, blue600, red800, white} from 'material-ui/styles/colors';
 import HomePage from './Pages/HomePage.jsx'
 import AdminPage from './Pages/AdminPage.jsx'
 import LoginPage from './Pages/LoginPage.jsx'
+import SignInPage from './Pages/SignInPage.jsx'
 import NoMatchPage from './Pages/NoMatchPage.jsx'
 
 //http utils for request post, get ...

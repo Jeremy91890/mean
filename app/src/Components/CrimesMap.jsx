@@ -141,7 +141,7 @@ class CrimesMap extends Component {
         return (
             <div className={'containerMainRow'}>
                 <Row style={styles.styleMainRow}>
-                    <Col lg={5} style={styles.styleTableMap}>
+                    <Col lg={6} style={styles.styleTableMap}>
                         <Table
                             onRowSelection={this.onHandleRowSelectionCrime}
                         >
@@ -149,6 +149,7 @@ class CrimesMap extends Component {
                                 displaySelectAll={false}
                             >
                                 <TableRow>
+                                    <TableHeaderColumn>Nature code</TableHeaderColumn>
                                     <TableHeaderColumn>Description</TableHeaderColumn>
                                     <TableHeaderColumn>Weapon Type</TableHeaderColumn>
                                     <TableHeaderColumn>Date</TableHeaderColumn>
@@ -159,6 +160,7 @@ class CrimesMap extends Component {
                             >
                                 {this.state.crimeToDisplay.map( (row, i) => (
                                     <TableRow key={i} value={row._id}>
+                                        <TableRowColumn>{row.naturecode}</TableRowColumn>
                                         <TableRowColumn>{row.incident_type_description}</TableRowColumn>
                                         <TableRowColumn>{row.weapontype}</TableRowColumn>
                                         <TableRowColumn>{row.fromdate}</TableRowColumn>
@@ -167,7 +169,7 @@ class CrimesMap extends Component {
                             </TableBody>
                         </Table>
                     </Col>
-                    <Col lg={7} style={styles.styleCrimesMap}>
+                    <Col lg={6} style={styles.styleCrimesMap}>
                         <Map google={window.google}
                             className={'map'}
                             onClick={this.onMapClicked}
