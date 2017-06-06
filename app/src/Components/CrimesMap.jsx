@@ -23,10 +23,22 @@ import api_ip_conf from '../config.js';
 const API_IP = api_ip_conf.endpoint;
 
 const styles = {
-    CrimesMap: {
-        width: '90vw',
-        height: '90vh',
-    }
+    styleMainRow: {
+        height: '100%',
+        marginLeft: 15,
+        marginRight: 15,
+    },
+    styleTableMap: {
+        overflow: 'auto',
+        maxHeight: '100%',
+        marginTop: 15,
+    },
+    //en css
+    styleCrimesMap: {
+        width: '100%',
+        height: '100%',
+        marginTop: 15,
+    },
 }
 
 class CrimesMap extends Component {
@@ -39,6 +51,12 @@ class CrimesMap extends Component {
             selectedCrimeFull: null,
             showingInfoWindow: false,
             openCrimeModal: false,
+
+            currentZoom: 12,
+            currentLocation: {
+                lat:  42.3250286936206,
+                lng: -71.0734144739058
+            }
         }
         console.log("props crime : ")
         console.log(this.state.crimeToDisplay)
@@ -46,6 +64,8 @@ class CrimesMap extends Component {
         //this.onMapClicked = this.onMapClicked.bind(this);
 
         this.processResponseGetCrimeById = this.processResponseGetCrimeById.bind(this);
+        
+        this.onHandleRowSelectionCrime = this.onHandleRowSelectionCrime.bind(this);
     }
     /*fetchPlaces(mapProps, map) {
         const {google} = mapProps;
@@ -103,41 +123,57 @@ class CrimesMap extends Component {
         }
     }
 */
+    onHandleRowSelectionCrime(key) {
+        console.log(key);
+        var selectedCrime = this.state.crimeToDisplay[key]
+        this.setState({
+            currentZoom: 20,
+            currentLocation: {
+                lat: this.extractLat(selectedCrime.location),
+                lng: this.extractLng(selectedCrime.location)
+            }
+        })
+        //Ici appel route get one crime by id
+        //renvoi dans un processResponce
+        //pour afficher modal crime avec info
+    }
     render() {
         return (
-            <div>
-                <Row>
-                    <Col lg={3}>
-                    <Table>
-                        <TableHeader
-                            displaySelectAll={false}
+            <div className={'containerMainRow'}>
+                <Row style={styles.styleMainRow}>
+                    <Col lg={5} style={styles.styleTableMap}>
+                        <Table
+                            onRowSelection={this.onHandleRowSelectionCrime}
                         >
-                            <TableRow>
-                                <TableHeaderColumn>Naturecode</TableHeaderColumn>
-                                <TableHeaderColumn>Description</TableHeaderColumn>
-                                <TableHeaderColumn>Weapon Type</TableHeaderColumn>
-                                <TableHeaderColumn>Date</TableHeaderColumn>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody
-                            displayRowCheckbox={false}
-                        >
-                            {this.state.crimeToDisplay.map( (row) => (
-                                <TableRow key={row._id}>
-                                    <TableRowColumn>{row.naturecode}</TableRowColumn>
-                                    <TableRowColumn>{row.incident_type_description}</TableRowColumn>
-                                    <TableRowColumn>{row.weapontype}</TableRowColumn>
-                                    <TableRowColumn>{row.fromdate}</TableRowColumn>
+                            <TableHeader
+                                displaySelectAll={false}
+                            >
+                                <TableRow>
+                                    <TableHeaderColumn>Description</TableHeaderColumn>
+                                    <TableHeaderColumn>Weapon Type</TableHeaderColumn>
+                                    <TableHeaderColumn>Date</TableHeaderColumn>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
+                            </TableHeader>
+                            <TableBody
+                                displayRowCheckbox={false}
+                            >
+                                {this.state.crimeToDisplay.map( (row, i) => (
+                                    <TableRow key={i} value={row._id}>
+                                        <TableRowColumn>{row.incident_type_description}</TableRowColumn>
+                                        <TableRowColumn>{row.weapontype}</TableRowColumn>
+                                        <TableRowColumn>{row.fromdate}</TableRowColumn>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
                     </Col>
-                    <Col lg={9}>
-                        <Map google={window.google} style={styles.CrimesMap}
+                    <Col lg={7} style={styles.styleCrimesMap}>
+                        <Map google={window.google}
+                            className={'map'}
                             onClick={this.onMapClicked}
-                            initialCenter= {{lat: 42.3250286936206,lng: -71.0734144739058}}
-                            zoom={12}>
+                            initialCenter={{lat: 42.3250286936206,lng: -71.0734144739058}}
+                            center={this.state.currentLocation}
+                            zoom={this.state.currentZoom}>
                                 {this.state.crimeToDisplay.map( (row) => (
                                     <Marker
                                         key={row._id}

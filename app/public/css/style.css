@@ -5,3 +5,17 @@ body {
 .container {
     margin: 0px;
 }
+
+.containerMainRow {
+     height: 800px;
+}
+.styleTableMap {
+     max-height: 100%;
+     overflow: auto;
+}
+
+.map {
+    position: relative !important;
+    height: 100% !important;
+    width: 100% !important;
+}
