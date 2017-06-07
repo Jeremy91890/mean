@@ -23,7 +23,7 @@ checkToken = function (token) {
 checkRole = function (token, role) {
     for (var row in authorizedUsers) {
         if (authorizedUsers[row].token == token) {
-            if (authorizedUsers[row].role == role)
+            if (authorizedUsers[row].role <= role)
                 return true;
         }
     }
