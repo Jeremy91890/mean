@@ -1,6 +1,19 @@
 module.exports = function(app) {
     const User = require('../models/models').UserModel;
 
+
+    //
+    //  GET all users
+    //
+    app.get('/users/getAllUsers', function (req, res) {
+        User.find(function (err, users) {
+            if (err)
+                res.json({success: false, message: err});
+            res.json({success: true, users: users});
+        });
+    });
+
+
     //
     //  GET all users validated
     //
