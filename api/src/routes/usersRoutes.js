@@ -6,11 +6,15 @@ module.exports = function(app) {
     //  GET all users
     //
     app.get('/users/getAllUsers', function (req, res) {
-        User.find(function (err, users) {
-            if (err)
-                res.json({success: false, message: err});
-            res.json({success: true, users: users});
-        });
+        if (checkToken(req.headers['x-token']) == false)
+            res.json({success: false, message: "User unauthorized"});
+        else {
+            User.find(function (err, users) {
+                if (err)
+                    res.json({success: false, message: err});
+                res.json({success: true, users: users});
+            });
+        }
     });
 
 
@@ -19,11 +23,16 @@ module.exports = function(app) {
     //
 
     app.get('/users/getAllUsersValidated', function (req, res) {
-        User.find({ validated: true }, function (err, users) {
-            if (err)
-                res.json({success: false, message: err});
-            res.json({success: true, users: users});
-        });
+        if (checkToken(req.headers['x-token']) == false)
+            res.json({success: false, message: "User unauthorized"});
+        else {
+            User.find({ validated: true }, function (err, users) {
+                if (err)
+                    res.json({success: false, message: err});
+                else
+                    res.json({success: true, users: users});
+            });
+        }
     });
 
     //
@@ -31,11 +40,16 @@ module.exports = function(app) {
     //
 
     app.get('/users/getAllUsersNonValidated', function (req, res) {
-        User.find({ validated: false }, function (err, users) {
-            if (err)
-                res.json({success: false, message: err});
-            res.json({success: true, users: users});
-        });
+        if (checkToken(req.headers['x-token']) == false)
+            res.json({success: false, message: "User unauthorized"});
+        else {
+            User.find({ validated: false }, function (err, users) {
+                if (err)
+                    res.json({success: false, message: err});
+                else
+                    res.json({success: true, users: users});
+            });
+        }
     });
 
     //
@@ -43,17 +57,30 @@ module.exports = function(app) {
     //
 
     app.post('/users/addUser', function (req, res) {
-        var newUser = new User();
-
-        newUser.email = req.body.email;
-        newUser.password = req.body.password;
-        newUser.role = req.body.role;
-        newUser.validated = false;
-
-        newUser.save(function(err){
+        User.findOne({email: req.body.email}, function(err, isEnable){
+            console.log(isEnable);
             if (err)
                 res.json({success: false, message: err});
-            res.json({success: true, message: "User created"});
+            else {
+                if (isEnable) {
+                    res.json({success: false, message: "User already exists"});
+                }
+                else {
+                    var newUser = new User();
+
+                    newUser.email = req.body.email;
+                    newUser.password = req.body.password;
+                    newUser.role = req.body.role;
+                    newUser.validated = false;
+
+                    newUser.save(function(err){
+                        if (err)
+                            res.json({success: false, message: err});
+                        else
+                            res.json({success: true, message: "User created"});
+                    });
+                }
+            }
         });
     });
 
@@ -62,13 +89,23 @@ module.exports = function(app) {
     //
 
     app.post('/users/validateUser', function (req, res) {
-        User.findOne({ email: req.body.email }, function (err, userToValidate) {
-            userToValidate.validated = true;
-            userToValidate.save();
-            if (err)
-                res.json({success: false, message: err});
-            res.json({success: true, message: "User validated"});
-        });
+        if (checkRole(req.headers['x-token'], 0) == false)
+            res.json({success: false, message: 'User unauthorized'});
+        else {
+            User.findOne({ email: req.body.email }, function (err, userToValidate) {
+                if (err)
+                    res.json({success: false, message: err});
+                else {
+                    if (userToValidate) {
+                        userToValidate.validated = true;
+                        userToValidate.save();
+                        res.json({success: true, message: "User validated"});
+                    }
+                    else
+                        res.json({success: false, message: "User not found"});
+                }
+            });
+        }
     });
 
     //
@@ -76,11 +113,27 @@ module.exports = function(app) {
     //
 
     app.post('/users/deleteUser', function (req, res) {
-        User.remove({ email: req.body.email }, function (err, userToDel) {
-            if (err)
-                res.json({success: false, message: err});
-            res.json({success: true, message: "User deleted"});
-        });
+        if (checkRole(req.headers['x-token'], 0) == false)
+            res.json({success: false, message: 'User unauthorized'});
+        else {
+            User.findOne({ email: req.body.email }, function (err, userToDel) {
+                if (err)
+                    res.json({success: false, message: err});
+                else {
+                    if (userToDel) {
+                        User.remove({ email: req.body.email }, function (err, userToDel) {
+                            if (err)
+                                res.json({success: false, message: err});
+                            else
+                                res.json({success: true, message: "User deleted"});
+                        });
+                    }
+                    else
+                        res.json({success: false, message: "User not found"});
+                }
+                    
+            });
+        }
     });
 
 };
