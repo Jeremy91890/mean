@@ -1,14 +1,7 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import CrimesMap from '../Components/CrimesMap.jsx';
 
-import {
-    Table,
-    TableBody,
-    TableFooter,
-    TableHeader,
-    TableHeaderColumn,
-    TableRow,
-    TableRowColumn,
-} from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 
@@ -21,73 +14,65 @@ import api_ip_conf from '../config.js';
 const API_IP = api_ip_conf.endpoint;
 
 const styles = {
-
 };
 
 class HomePage extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
-            allCrimes: null,
+            crimeToDisplay: null,
         }
-        this.processResponseGetAllCrimes = this.processResponseGetAllCrimes.bind(this);
+        this.processResponseGeHundredtLatestCrimes = this.processResponseGeHundredtLatestCrimes.bind(this);
+
+        this.onHandleCellSelectionCrime = this.onHandleCellSelectionCrime.bind(this);
     }
 
     componentWillMount(){
-        this.getAllCrimes();
+       this.geHundredtLatestCrimes();
     }
 
-    getAllCrimes(){
+    geHundredtLatestCrimes(){
         var API = API_IP + "/crimes/geHundredtLatestCrimes";
         var headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json'};
-        getData(API, headers, this.processResponseGetAllCrimes)
+        getData(API, headers, this.processResponseGeHundredtLatestCrimes)
     }
 
-    processResponseGetAllCrimes(resp) {
-        resp = resp.responseJSON;
-        this.setState({allCrimes: resp.crimes});
-        console.log(resp)
+    processResponseGeHundredtLatestCrimes(resp) {
+        if (resp.responseJSON != undefined) {
+            resp = resp.responseJSON;
+            if (resp.success == true) {
+                this.setState({crimeToDisplay: resp.crimes});
+            }
+            else {
+                console.log(resp.message)
+            }
+        }
+    }
+
+    onHandleCellSelectionCrime(key) {
+        console.log(key);
+        console.log(this.state.crimeToDisplay[key]._id)
+        //Ici appel route get one crime by id
+        //renvoi dans un processResponce
+        //pour afficher modal crime avec info
     }
 
     render() {
         return (
             <div>
                 {
-                    this.state.allCrimes != null
-                        ?
-                        <Table>
-                            <TableHeader
-                                displaySelectAll={false}
-                            >
-                                <TableRow>
-                                    <TableHeaderColumn>Naturecode</TableHeaderColumn>
-                                    <TableHeaderColumn>Description</TableHeaderColumn>
-                                    <TableHeaderColumn>Weapon Type</TableHeaderColumn>
-                                    <TableHeaderColumn>Date</TableHeaderColumn>
-                                </TableRow>
-                            </TableHeader>
-                            <TableBody
-                                displayRowCheckbox={false}
-                            >
-                                {this.state.allCrimes.map( (row) => (
-                                    <TableRow key={row._id}>
-                                        <TableRowColumn>{row.naturecode}</TableRowColumn>
-                                        <TableRowColumn>{row.incident_type_description}</TableRowColumn>
-                                        <TableRowColumn>{row.weapontype}</TableRowColumn>
-                                        <TableRowColumn>{row.fromdate}</TableRowColumn>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                        :
-                        null
-
+                    this.state.crimeToDisplay != null
+                    ?
+                    <CrimesMap crimeToDisplay={this.state.crimeToDisplay}/>
+                    :
+                    <p>Chargement</p>
                 }
             </div>
         )
     }
 }
+
 
 export default HomePage;
