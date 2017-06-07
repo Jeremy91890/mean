@@ -17,9 +17,10 @@ const styles = {
 };
 
 class HomePage extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
+            userRole: props.userRole,
             crimeToDisplay: null,
         }
         this.processResponseGeHundredtLatestCrimes = this.processResponseGeHundredtLatestCrimes.bind(this);
@@ -65,7 +66,9 @@ class HomePage extends Component {
                 {
                     this.state.crimeToDisplay != null
                     ?
-                    <CrimesMap crimeToDisplay={this.state.crimeToDisplay}/>
+                    <CrimesMap crimeToDisplay={this.state.crimeToDisplay}
+                        userRole={this.state.userRole}
+                    />
                     :
                     <p>Chargement</p>
                 }
