@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+
 import { withGoogleMap, GoogleMap, Marker, Map, InfoWindow } from 'google-maps-react';
 
 import CrimeModal from './CrimeModal.jsx';
@@ -145,8 +147,8 @@ class CrimesMap extends Component {
         //pour afficher modal crime avec info
     }
     render() {
-        return (
-            <div className={'containerMainRow'}>
+        return ( 
+            <div className={'containerMainRow'}> 
                 <Row style={styles.styleMainRow}>
                     <Col lg={6} style={styles.styleTableMap}>
                         <Table

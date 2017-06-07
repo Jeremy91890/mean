@@ -35,10 +35,16 @@ const styles = {
     tableRow: {
         textAlign: 'center',
     },
+
     modalStyle: {
       borderRadius: 5,
       position: 'absolute',
-        top: -200,
+      marginTop: -200,
+    },
+
+    buttonStyle: {
+        position: 'relative',
+        margin: 0,
     },
 
     cardStyle: {
@@ -78,7 +84,7 @@ class CrimeModal extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{overflow: 'auto'}}>
                  <Dialog style={styles.modalStyle}
                     title="Dialog With Actions"
                     modal={false}
@@ -88,8 +94,8 @@ class CrimeModal extends Component {
                     {
                         this.state.selectedCrimeFull != null
                         ?
-                        <div>
-                          <Card>
+                        <div style={{overflow: 'auto'}}>
+                          <Card >
                             <CardHeader
                             title="Identification"
                             actAsExpander={true}
@@ -149,38 +155,34 @@ class CrimeModal extends Component {
                                 <TableHeader adjustForCheckbox={false} displaySelectAll={false} style={styles.tableHeader}>
                                     <TableRow>
                                         <TableRowColumn style={styles.tableRow}>
-                                            Year
-                                        </TableRowColumn>
-                                        <TableRowColumn style={styles.tableRow}>
-                                            Month
-                                        </TableRowColumn>
-                                        <TableRowColumn style={styles.tableRow}>
-                                            Day
+                                            Date
                                         </TableRowColumn>
                                         <TableRowColumn style={styles.tableRow}>
                                             Street name
                                         </TableRowColumn>
                                         <TableRowColumn style={styles.tableRow}>
-                                            Location
+                                            Location X
+                                        </TableRowColumn>
+                                         <TableRowColumn style={styles.tableRow}>
+                                            Location Y
                                         </TableRowColumn>
                                     </TableRow>
                                 </TableHeader> 
                                 <TableBody displayRowCheckbox={false}>
                                         <TableRow>
                                             <TableRowColumn style={styles.tableRow}>
-                                                {this.state.selectedCrimeFull.year}
-                                            </TableRowColumn>
-                                            <TableRowColumn style={styles.tableRow}>
-                                                {this.state.selectedCrimeFull.month}
-                                            </TableRowColumn>
-                                            <TableRowColumn style={styles.tableRow}>
-                                               {this.state.selectedCrimeFull.day_week}
+                                                {this.state.selectedCrimeFull.year}&nbsp;&nbsp;
+                                                {this.state.selectedCrimeFull.month}&nbsp;&nbsp;
+                                                {this.state.selectedCrimeFull.day_week}
                                             </TableRowColumn>
                                             <TableRowColumn style={styles.tableRow}>
                                                 {this.state.selectedCrimeFull.streetname}
                                             </TableRowColumn>
                                             <TableRowColumn style={styles.tableRow}>
-                                                {this.state.selectedCrimeFull.location}
+                                                {this.state.selectedCrimeFull.x}
+                                            </TableRowColumn>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                {this.state.selectedCrimeFull.y}
                                             </TableRowColumn>
                                         </TableRow> 
                                     </TableBody>
@@ -246,7 +248,10 @@ class CrimeModal extends Component {
                             </CardText>
                         </Card>
                         <br/>
-                        <RaisedButton label="EDIT" />
+                        <br/>
+                         <div style={styles.buttonStyle}>
+                            <RaisedButton  label="EDIT" />
+                        </div>
                         </div>
                         :
                         <p>Probleme de chargement</p>

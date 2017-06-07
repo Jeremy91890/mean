@@ -19,6 +19,7 @@ import {blue500, blue600, red800, white} from 'material-ui/styles/colors';
 import HomePage from './Pages/HomePage.jsx'
 import AdminPage from './Pages/AdminPage.jsx'
 import LoginPage from './Pages/LoginPage.jsx'
+import AddCrime from './Pages/AddCrime.jsx'
 import NoMatchPage from './Pages/NoMatchPage.jsx'
 
 //http utils for request post, get ...
@@ -138,6 +139,7 @@ class Rooter extends Component {
         //check credentials for private page access
         var __HomePage = this.checkNormalPageAccess() ? _HomePage : _LoginPage;
         var __AdminPage = this.checkAdminPageAccess() ? _AdminPage : __HomePage;
+        var _AddCrime = this.checkAdminPageAccess() ? AddCrime : __HomePage;
 
         return (
             <Router>
@@ -154,6 +156,7 @@ class Rooter extends Component {
                                         <NavLink to="/"><MenuItem primaryText="Home"/></NavLink>
                                         {this.state.userRole == 0 ? <NavLink to="/admin"><MenuItem primaryText="Admin"/></NavLink> : null}
                                         <NavLink to="/"><MenuItem primaryText="Logout" onTouchTap={this.logout}/></NavLink>
+                                        <NavLink to="/addcrime"><MenuItem primaryText="Create" /></NavLink>
                                     </IconMenu>
                                 }
                             />
@@ -164,6 +167,7 @@ class Rooter extends Component {
                         <Switch>
                             <Route exact path="/" component={__HomePage}/>
                             <Route path="/admin" component={__AdminPage}/>
+                            <Route path="/addcrime" component={_AddCrime}/>
                             <Route component={_HomePage}/>
                         </Switch>
                     </div>
