@@ -32,27 +32,31 @@ module.exports = function(app) {
     //
 
     app.post('/users/addUser', function (req, res) {
-        User.find({email: req.body.email}, function(err, isEnable){
+        User.findOne({email: req.body.email}, function(err, isEnable){
+            console.log(isEnable);
             if (err)
                 res.json({success: false, message: err});
+            else {
+                if (isEnable) {
+                    res.json({success: false, message: "User already exists"});
+                }
+                else {
+                    var newUser = new User();
+
+                    newUser.email = req.body.email;
+                    newUser.password = req.body.password;
+                    newUser.role = req.body.role;
+                    newUser.validated = false;
+
+                    newUser.save(function(err){
+                        if (err)
+                            res.json({success: false, message: err});
+                        else
+                            res.json({success: true, message: "User created"});
+                    });
+                }
+            }
         });
-        if (isEnable)
-            res.json({success: false, message: "User already exists"});
-        else {
-            var newUser = new User();
-
-            newUser.email = req.body.email;
-            newUser.password = req.body.password;
-            newUser.role = req.body.role;
-            newUser.validated = false;
-
-            newUser.save(function(err){
-                if (err)
-                    res.json({success: false, message: err});
-                else
-                    res.json({success: true, message: "User created"});
-            });
-        }
     });
 
     //
