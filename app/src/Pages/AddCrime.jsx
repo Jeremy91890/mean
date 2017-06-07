@@ -7,6 +7,8 @@ import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 import {Container, Row, Col} from 'react-grid-system';
 import areIntlLocalesSupported from 'intl-locales-supported';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 //http utils for request post, get ...
 import {postData, getData} from '../Utils/requestUtils.js';
@@ -75,18 +77,33 @@ class AddCrime extends Component {
             xstreetname: "",
             location: ""
         }
-        this.handleChangeTextField = this.handleChangeTextField.bind(this)
-        this.handleChangeFromDate = this.handleChangeFromDate .bind(this);
-    }
+        this.handleChangeTextField = this.handleChangeTextField.bind(this);
+        this.handleChangeFromDate = this.handleChangeFromDate.bind(this);
+        this.handleChangeShooting = this.handleChangeShooting.bind(this);
+        this.handleChangeDomestic = this.handleChangeDomestic.bind(this);
+        this.handleChangeUcrpart = this.handleChangeUcrpart.bind(this);
+
+}
 
     //Maj des states
     handleChangeTextField(event) {
         this.setState({[event.target.id]: event.target.value})
-        console.log(this.state.naturecode)
      };
 
     handleChangeFromDate(event, date) {
         this.setState({fromdate: date});
+    }
+
+    handleChangeShooting(event, index, value) {
+        this.setState({shooting: value});
+    } 
+        
+    handleChangeDomestic(event, index, value) {
+        this.setState({domestic: value});
+    }
+
+    handleChangeUcrpart(event, index, value) {
+        this.setState({ucrpart: value});
     }
 
     render() {
@@ -147,18 +164,23 @@ class AddCrime extends Component {
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
-                        <TextField
-                            id="shooting"
-                            placeholder="shooting"
-                            onChange={this.handleChangeTextField}
-                            type="text"
-                        /><br/> 
-                        <TextField
-                            id="domestic"
-                            placeholder="domestic"
-                            onChange={this.handleChangeTextField}
-                            type="text"
-                        /><br/>
+
+                         <SelectField
+                            floatingLabelText="shooting"
+                            value={this.state.shooting}
+                            onChange={this.handleChangeShooting}
+                            >
+                            <MenuItem value={false} primaryText="No" />
+                            <MenuItem value={true} primaryText="Yes" />
+                            </SelectField>
+                        <SelectField
+                            floatingLabelText="domestic"
+                            value={this.state.domestic}
+                            onChange={this.handleChangeDomestic}
+                            >
+                            <MenuItem value={false} primaryText="No" />
+                            <MenuItem value={true} primaryText="Yes" />
+                            </SelectField>
                     </Col>
                     <Col lg={6} style={styles.styleTableMap}>
                         <TextField
@@ -191,12 +213,17 @@ class AddCrime extends Component {
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
-                        <TextField
-                            id="ucrpart"
-                            placeholder="ucrpart"
-                            onChange={this.handleChangeTextField}
-                            type="text"
-                        /><br/>
+                        <SelectField
+                            floatingLabelText="ucrpart"
+                            value={this.state.ucrpart}
+                            onChange={this.handleChangeUcrpart}
+                            >
+                            <MenuItem value="Part One" primaryText="Part one" />
+                            <MenuItem value="Part Two" primaryText="Part two" />
+                            <MenuItem value="Part three" primaryText="Part three" />
+                            <MenuItem value="Other" primaryText="Other" />
+
+                            </SelectField>
                         <TextField
                             id="streetname"
                             placeholder="streetname"
