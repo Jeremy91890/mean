@@ -70,6 +70,14 @@ class AdminPage extends Component {
         }     
     }
 
+    deleteUserBtnClick(user) {
+        //message de validation (alert)
+    }
+
+    processResponseDeleteUser(resp) {
+        
+    }
+
     render() {
         return (
             <div>
