@@ -35,7 +35,7 @@ const API_IP = api_ip_conf.endpoint;
 
 const style = {
     appBar: {
-        backgroundColor: blue500
+        backgroundColor: "#2D2D2D"
     }
 }
 
@@ -149,8 +149,8 @@ class Rooter extends Component {
                             ?
                             <AppBar
                                 style={style.appBar}
-                                iconElementLeft={<b>Logo</b>}
-                                title="Titre"
+                                iconElementLeft={<img height={48} src="/public/img/logo_police.png"></img>}
+                                title="Mean"
                                 iconElementRight={
                                     <IconMenu iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}>
                                         <NavLink to="/"><MenuItem primaryText="Home"/></NavLink>

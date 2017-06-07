@@ -148,5 +148,4 @@ module.exports = function(app) {
             }).sort({'fromdate': -1});
         }
     });
-
 };

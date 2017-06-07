@@ -86,7 +86,7 @@ class CrimeModal extends Component {
         return (
             <div style={{overflow: 'auto'}}>
                  <Dialog style={styles.modalStyle}
-                    title="Dialog With Actions"
+                    title={this.selectedCrimeFull.incident_type_description}
                     modal={false}
                     open={this.state.openCrimeModal}
                     onRequestClose={this.handleCloseModal}
@@ -263,69 +263,3 @@ class CrimeModal extends Component {
 }
 
 export default CrimeModal;
-
-/*
-compnos
-:
-"None"
-day_week
-:
-"Monday"
-domestic
-:
-true
-fromdate
-:
-"2015-08-10T00:00:00.000Z"
-incident_type_description
-:
-"Recovered Stolen Property"
-location
-:
-"(42.3525598061323, -71.0604320748137)"
-main_crimecode
-:
-"13xx"
-month
-:
-8
-naturecode
-:
-"ARREST"
-reportingarea
-:
-116
-reptdistrict
-:
-"A1"
-shift
-:
-"None"
-shooting
-:
-true
-streetname
-:
-"ESSEX ST"
-ucrpart
-:
-"Part Two"
-weapontype
-:
-"None"
-x
-:
-774984
-xstreetname
-:
-"NULL"
-y
-:
-2950000
-year
-:
-2015
-_id
-:
-"592589348db3dfcacaf83950"
-*/
