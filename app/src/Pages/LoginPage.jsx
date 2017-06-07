@@ -29,7 +29,7 @@ const style = {
         marginTop: "10%"
     },
     styleAppBarLogin: {
-        backgroundColor: blue600,
+        backgroundColor: "#2D2D2D",
     },
     styleFooterLogin: {
         backgroundColor: white,
@@ -255,7 +255,7 @@ class LoginPage extends Component {
                                                 style={{marginBottom: 5}}
                                                 onTouchTap={this.createAccountBtnClick}
                                                 labelColor={white}
-                                                backgroundColor={blue500}
+                                                backgroundColor={"#2D2D2D"}
                                                 disabled={this.state.displayLoadingProcessCreateAccount}
                                     />
                                     <div style={{marginBottom: 40}}>
@@ -288,7 +288,7 @@ class LoginPage extends Component {
                                                 style={{marginBottom: 5}}
                                                 onTouchTap={this.loginBtnClick}
                                                 labelColor={white}
-                                                backgroundColor={blue500}
+                                                backgroundColor={"#2D2D2D"}
                                                 disabled={this.state.displayLoadingProcessLogin}
                                     />
                                     <div style={{marginBottom: 40}}>
