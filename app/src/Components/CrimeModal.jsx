@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
 
 import {
     Table,
@@ -24,9 +26,20 @@ import api_ip_conf from '../config.js';
 const API_IP = api_ip_conf.endpoint;
 
 const styles = {
-    TableBody: {
-        displayRowCheckbox: false,
+    tableHeader: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
     },
+
+    tableRow: {
+        textAlign: 'center',
+    },
+    modalStyle: {
+      borderRadius: 5,
+      position: 'absolute',
+        top: -200,
+    }
 };
 
 class CrimeModal extends Component {
@@ -52,10 +65,17 @@ class CrimeModal extends Component {
         this.setState({openCrimeModal: false});
     }
 
+    //Maj du state naturecode
+    handleChangeNaturecode(event) {
+        this.setState({
+            naturecode: event.target.value,
+        });
+    };
+
     render() {
         return (
             <div>
-                 <Dialog
+                 <Dialog style={styles.modalStyle}
                     title="Dialog With Actions"
                     modal={false}
                     open={this.state.openCrimeModal}
@@ -65,25 +85,162 @@ class CrimeModal extends Component {
                         this.state.selectedCrimeFull != null
                         ?
                         <div>
-                             <TableBody stripedRows >
-                                <TableRow>
-                                    <TableRowColumn>
-                                        naturecode
-                                    </TableRowColumn>
-                                    <TableRowColumn>
-                                       {this.state.selectedCrimeFull.naturecode}
-                                    </TableRowColumn>
-                                </TableRow>
-                                 <TableRow>
-                                    <TableRowColumn>
-                                        naturecode
-                                    </TableRowColumn>
-                                    <td>
-                                       {this.state.selectedCrimeFull.naturecode}
-                                    </td>
-                                </TableRow>
-                            </TableBody>
-                        Affichage crime ici
+                          <Card>
+                            <CardHeader
+                            title="Identification"
+                            actAsExpander={true}
+                            showExpandableButton={true}
+                            />
+                            <CardText expandable={true}>
+                                <Table>
+                                    <TableHeader adjustForCheckbox={false} displaySelectAll={false} style={styles.tableHeader}>
+                                        <TableRow>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                Compnos
+                                            </TableRowColumn>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                Naturecode
+                                            </TableRowColumn>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                Crime code
+                                            </TableRowColumn>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                Rept district
+                                            </TableRowColumn>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                Reporting area
+                                            </TableRowColumn>
+                                        </TableRow>
+                                    </TableHeader> 
+                                    <TableBody displayRowCheckbox={false}>
+                                        <TableRow>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                {this.state.selectedCrimeFull.compnos}
+                                            </TableRowColumn>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                {this.state.selectedCrimeFull.naturecode}
+                                            </TableRowColumn>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                {this.state.selectedCrimeFull.main_crimecode}
+                                            </TableRowColumn>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                {this.state.selectedCrimeFull.reptdistrict}
+                                            </TableRowColumn>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                {this.state.selectedCrimeFull.reportingarea}
+                                            </TableRowColumn>
+                                        </TableRow> 
+                                    </TableBody>
+                                </Table>
+                            </CardText>
+                        </Card>
+                         <Card>
+                            <CardHeader
+                            title="Places"
+                            actAsExpander={true}
+                            showExpandableButton={true}
+                            />
+                            <CardText expandable={true}>
+                             <Table>
+                                <TableHeader adjustForCheckbox={false} displaySelectAll={false} style={styles.tableHeader}>
+                                    <TableRow>
+                                        <TableRowColumn style={styles.tableRow}>
+                                            Year
+                                        </TableRowColumn>
+                                        <TableRowColumn style={styles.tableRow}>
+                                            Month
+                                        </TableRowColumn>
+                                        <TableRowColumn style={styles.tableRow}>
+                                            Day
+                                        </TableRowColumn>
+                                        <TableRowColumn style={styles.tableRow}>
+                                            Street name
+                                        </TableRowColumn>
+                                        <TableRowColumn style={styles.tableRow}>
+                                            Location
+                                        </TableRowColumn>
+                                    </TableRow>
+                                </TableHeader> 
+                                <TableBody displayRowCheckbox={false}>
+                                        <TableRow>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                {this.state.selectedCrimeFull.year}
+                                            </TableRowColumn>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                {this.state.selectedCrimeFull.month}
+                                            </TableRowColumn>
+                                            <TableRowColumn style={styles.tableRow}>
+                                               {this.state.selectedCrimeFull.day_week}
+                                            </TableRowColumn>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                {this.state.selectedCrimeFull.streetname}
+                                            </TableRowColumn>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                {this.state.selectedCrimeFull.location}
+                                            </TableRowColumn>
+                                        </TableRow> 
+                                    </TableBody>
+                                </Table>
+                            </CardText>
+                        </Card>
+                        <Card>
+                            <CardHeader
+                            title="Crime description"
+                            actAsExpander={true}
+                            showExpandableButton={true}
+                            />
+                            <CardText expandable={true}>
+                                <Table>
+
+                                    <TableHeader adjustForCheckbox={false} displaySelectAll={false} style={styles.tableHeader}>
+                                        <TableRow>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                Weapon type
+                                            </TableRowColumn>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                Shooting
+                                            </TableRowColumn>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                Domestic
+                                            </TableRowColumn>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                Shift
+                                            </TableRowColumn>
+                                            <TableRowColumn style={styles.tableRow}>
+                                                UCR part
+                                            </TableRowColumn>
+                                        </TableRow>
+                                    </TableHeader> 
+                                    <TableBody displayRowCheckbox={false}>
+                                            <TableRow>
+                                                <TableRowColumn style={styles.tableRow}>
+                                                    {this.state.selectedCrimeFull.weapontype}
+                                                </TableRowColumn>
+                                                <TableRowColumn style={styles.tableRow}>
+                                                {this.state.selectedCrimeFull.shooting != false
+                                                    ?
+                                                    <p>YES</p>
+                                                    :
+                                                <p> NO</p>}
+                                                </TableRowColumn>
+                                                <TableRowColumn style={styles.tableRow}>
+                                                    {this.state.selectedCrimeFull.domestic != false
+                                                    ?
+                                                    <p>YES</p>
+                                                    :
+                                                <p> NO</p>}
+                                                </TableRowColumn>
+                                                <TableRowColumn style={styles.tableRow}>
+                                                    {this.state.selectedCrimeFull.shift}
+                                                </TableRowColumn>
+                                                <TableRowColumn style={styles.tableRow}>
+                                                    {this.state.selectedCrimeFull.ucrpart}
+                                                </TableRowColumn>
+                                            </TableRow> 
+                                        </TableBody>
+                                </Table>
+                            </CardText>
+                        </Card>
                         </div>
                         :
                         <p>Probleme de chargement</p>
