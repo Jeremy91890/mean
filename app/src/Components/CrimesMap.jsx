@@ -176,6 +176,7 @@ class CrimesMap extends Component {
                                         <TableRowColumn>{row.incident_type_description}</TableRowColumn>
                                         <TableRowColumn>{row.weapontype}</TableRowColumn>
                                         <TableRowColumn>{row.fromdate}</TableRowColumn>
+
                                     </TableRow>
                                 ))}
                             </TableBody>
