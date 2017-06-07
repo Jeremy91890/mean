@@ -2,11 +2,23 @@ module.exports = function(app) {
     const User = require('../models/models').UserModel;
 
     //
-    //  GET all users
+    //  GET all users validated
     //
 
-    app.get('/users/getAllUsers', function (req, res) {
-        User.find(function (err, users) {
+    app.get('/users/getAllUsersValidated', function (req, res) {
+        User.find({ validated: true }, function (err, users) {
+            if (err)
+                res.json({success: false, message: err});
+            res.json({success: true, users: users});
+        });
+    });
+
+    //
+    //  GET all users non-validated
+    //
+
+    app.get('/users/getAllUsersNonValidated', function (req, res) {
+        User.find({ validated: false }, function (err, users) {
             if (err)
                 res.json({success: false, message: err});
             res.json({success: true, users: users});
