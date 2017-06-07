@@ -56,12 +56,16 @@ module.exports = function(app) {
     });
 
     app.post('/auth/deleteToken', function (req, res) {
-        for (var row in authorizedUsers) {
-            if (authorizedUsers[row].token == req.body.token) {
-                authorizedUsers.splice(row, 1);
-                res.json({success: true, message: "token deleted"});
+        if (checkToken(req.headers['x-token']) == false)
+            res.json({success: false, message: "User unauthorized"});
+        else {
+            for (var row in authorizedUsers) {
+                if (authorizedUsers[row].token == req.body.token) {
+                    authorizedUsers.splice(row, 1);
+                    res.json({success: true, message: "token deleted"});
+                }
             }
+            res.json({success: false, message: "token not exist"});
         }
-        res.json({success: false, message: "token not exist"});
     });
 };
