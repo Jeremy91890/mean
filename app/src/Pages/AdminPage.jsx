@@ -51,6 +51,7 @@ class AdminPage extends Component {
         this.processResponseLoadAllValidatedUsers = this.processResponseLoadAllValidatedUsers.bind(this);
         this.processResponseLoadAllNonValidatedUsers = this.processResponseLoadAllNonValidatedUsers.bind(this);
 
+        this.processResponseDeleteUser = this.processResponseDeleteUser.bind(this);
         this.processResponseValidateUser = this.processResponseValidateUser.bind(this);
     }
 
@@ -105,15 +106,39 @@ class AdminPage extends Component {
     }
 
     deleteUserBtnClick(user) {
-        //message de validation (alert)
+        var API = API_IP + "/users/deleteUser/";
+        var headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'};
+        var data = JSON.stringify({email: user.email});
+        postData(API, headers, data, this.processResponseDeleteUser)
     }
 
     processResponseDeleteUser(resp) {
-        
+        console.log(resp)
+        if (resp.responseJSON != undefined) {
+            resp = resp.responseJSON;
+            if (resp.success == true) {
+                this.setState({
+                    showSnackBar: true,
+                    messageSnackBar: resp.message,
+                    colorSnackBar: green800
+                });
+                this.loadAllValidatedUsers();
+                this.loadAllNonValidatedUsers();
+            }
+            else {
+                this.setState({
+                    showSnackBar: true,
+                    messageSnackBar: resp.message,
+                    colorSnackBar: red800
+                });
+            }
+        }  
     }
 
 
-    validateUser(user) {
+    validateUserBtnClick(user) {
         var API = API_IP + "/users/validateUser/";
         var headers = {
             'Accept': 'application/json',
@@ -123,7 +148,6 @@ class AdminPage extends Component {
     }
 
     processResponseValidateUser(resp) {
-        console.log(resp)
         if (resp.responseJSON != undefined) {
             resp = resp.responseJSON;
             if (resp.success == true) {
@@ -149,7 +173,7 @@ class AdminPage extends Component {
         return (
             <div>
                 <Row style={styles.styleMainRow}>
-                    <Col lg={6}>
+                    <Col lg={8}>
                     {
                         this.state.allValidatedUsers != null
                         ?
@@ -162,6 +186,7 @@ class AdminPage extends Component {
                                         <TableHeaderColumn>Email</TableHeaderColumn>
                                         <TableHeaderColumn>Password</TableHeaderColumn>
                                         <TableHeaderColumn>Role</TableHeaderColumn>
+                                        <TableHeaderColumn>Action</TableHeaderColumn>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody
@@ -172,6 +197,7 @@ class AdminPage extends Component {
                                             <TableRowColumn>{row.email}</TableRowColumn>
                                             <TableRowColumn>{row.password}</TableRowColumn>
                                             <TableRowColumn>{row.role}</TableRowColumn>
+                                            <TableRowColumn><FlatButton label="Supprimer" onTouchTap={this.deleteUserBtnClick.bind(this, row)}/></TableRowColumn>
                                         </TableRow>
                                     ))}
                                 </TableBody>
@@ -181,7 +207,7 @@ class AdminPage extends Component {
                         <p>Aucun user</p>
                     }
                     </Col>
-                    <Col lg={6}>
+                    <Col lg={4}>
                         {
                             this.state.allNonValidatedUsers != null
                             ?
@@ -202,7 +228,7 @@ class AdminPage extends Component {
                                             <TableRow key={i} value={row.email}>
                                                 <TableRowColumn>{row.email}</TableRowColumn>
                                                 <TableRowColumn>{row.role}</TableRowColumn>
-                                                <TableRowColumn><FlatButton label="Valider" onTouchTap={this.validateUser.bind(this, row)}/></TableRowColumn>
+                                                <TableRowColumn><FlatButton label="Valider" onTouchTap={this.validateUserBtnClick.bind(this, row)}/></TableRowColumn>
                                             </TableRow>
                                         ))}
                                     </TableBody>
