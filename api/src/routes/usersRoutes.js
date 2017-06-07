@@ -6,11 +6,15 @@ module.exports = function(app) {
     //  GET all users
     //
     app.get('/users/getAllUsers', function (req, res) {
-        User.find(function (err, users) {
-            if (err)
-                res.json({success: false, message: err});
-            res.json({success: true, users: users});
-        });
+        if (checkToken(req.headers['x-token']) == false)
+            res.json({success: false, message: "User unauthorized"});
+        else {
+            User.find(function (err, users) {
+                if (err)
+                    res.json({success: false, message: err});
+                res.json({success: true, users: users});
+            });
+        }
     });
 
 
@@ -19,12 +23,16 @@ module.exports = function(app) {
     //
 
     app.get('/users/getAllUsersValidated', function (req, res) {
-        User.find({ validated: true }, function (err, users) {
-            if (err)
-                res.json({success: false, message: err});
-            else
-                res.json({success: true, users: users});
-        });
+        if (checkToken(req.headers['x-token']) == false)
+            res.json({success: false, message: "User unauthorized"});
+        else {
+            User.find({ validated: true }, function (err, users) {
+                if (err)
+                    res.json({success: false, message: err});
+                else
+                    res.json({success: true, users: users});
+            });
+        }
     });
 
     //
@@ -32,12 +40,16 @@ module.exports = function(app) {
     //
 
     app.get('/users/getAllUsersNonValidated', function (req, res) {
-        User.find({ validated: false }, function (err, users) {
-            if (err)
-                res.json({success: false, message: err});
-            else
-                res.json({success: true, users: users});
-        });
+        if (checkToken(req.headers['x-token']) == false)
+            res.json({success: false, message: "User unauthorized"});
+        else {
+            User.find({ validated: false }, function (err, users) {
+                if (err)
+                    res.json({success: false, message: err});
+                else
+                    res.json({success: true, users: users});
+            });
+        }
     });
 
     //
