@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { withGoogleMap, GoogleMap, Marker, Map, InfoWindow } from 'google-maps-react';
+import { withGoogleMap, GoogleMap, Marker, Map, InfoWindow} from 'google-maps-react';
 
 import CrimeModal from './CrimeModal.jsx';
 
@@ -143,6 +143,7 @@ class CrimesMap extends Component {
         //renvoi dans un processResponce
         //pour afficher modal crime avec info
     }
+
     render() {
         return (
             <div className={'containerMainRow'}>
@@ -181,7 +182,8 @@ class CrimesMap extends Component {
                             onClick={this.onMapClicked}
                             initialCenter={{lat: 42.3250286936206,lng: -71.0734144739058}}
                             center={this.state.currentLocation}
-                            zoom={this.state.currentZoom}>
+                            zoom={this.state.currentZoom}
+                        >
                                 {this.state.crimeToDisplay.map( (row) => (
                                     <Marker
                                         key={row._id}

@@ -80,11 +80,27 @@ module.exports = function(app) {
   // Get 100 oldest crimes
   //
 
-      app.get('/crimes/geHundredtOldestCrimes', function (req, res) {
+    app.get('/crimes/geHundredtOldestCrimes', function (req, res) {
         Crime.find(function (err, crimes) {
             if (err)
                 res.json({success: false, message: err});
             res.json({success: true, crimes: crimes});
         }).sort({'fromdate': 1}).limit(100);
     });
+
+    app.post('/crimes/getCrimeByCriterias', function (req, res) {
+        var query = {};
+        if (req.body.natudecode != "null")
+            query.naturecode = req.body.naturecode;
+        if (req.body.weapontype != "null")
+            query.weapontype = req.body.weapontype;
+
+        Crime.find(query, function (err, crimes) {
+            if (err)
+                res.json({success: false, message: err});
+            res.json({success: true, crimes: crimes});
+        });
+    });
+
+
 };

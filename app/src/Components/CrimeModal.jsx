@@ -44,7 +44,7 @@ class CrimeModal extends Component {
         return (
             <div>
                  <Dialog
-                    title="Dialog With Actions"
+                    title={this.selectedCrimeFull.incident_type_description}
                     modal={false}
                     open={this.state.openCrimeModal}
                     onRequestClose={this.handleCloseModal}

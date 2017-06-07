@@ -13,7 +13,7 @@ createToken = function () {
 
 checkToken = function (token) {
     for (var row in authorizedUsers) {
-        if (row.token == token) {
+        if (authorizedUsers[row].token == token) {
             return true;
         }
     }
