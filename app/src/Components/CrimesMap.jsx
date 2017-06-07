@@ -132,6 +132,7 @@ class CrimesMap extends Component {
         console.log(key);
         var selectedCrime = this.state.crimeToDisplay[key]
         this.setState({
+            openCrimeModal: false,
             currentZoom: 20,
             currentLocation: {
                 lat: this.extractLat(selectedCrime.location),
