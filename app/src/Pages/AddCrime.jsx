@@ -135,18 +135,6 @@ class AddCrime extends Component {
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
-                        <TextField
-                            id="reptdistrict"
-                            placeholder="reptdistrict"
-                            onChange={this.handleChangeTextField}
-                            type="text"
-                        /><br/>
-                        <TextField
-                            id="reportingarea"
-                            placeholder="reportingarea"
-                            onChange={this.handleChangeTextField}
-                            type="text"
-                        /><br/>
                         <DatePicker
                             id="fromdate"
                             floatingLabelText="Fromdate"
@@ -158,13 +146,6 @@ class AddCrime extends Component {
                             onChange={this.handleChangeFromDate}
                             value={this.state.fromdate}
                         />
-                        <TextField
-                            id="weapontype"
-                            placeholder="weapontype"
-                            onChange={this.handleChangeTextField}
-                            type="text"
-                        /><br/>
-
                          <SelectField
                             floatingLabelText="shooting"
                             value={this.state.shooting}
@@ -181,8 +162,25 @@ class AddCrime extends Component {
                             <MenuItem value={false} primaryText="No" />
                             <MenuItem value={true} primaryText="Yes" />
                             </SelectField>
+                            <SelectField
+                            floatingLabelText="ucrpart"
+                            value={this.state.ucrpart}
+                            onChange={this.handleChangeUcrpart}
+                            >
+                            <MenuItem value="Part One" primaryText="Part one" />
+                            <MenuItem value="Part Two" primaryText="Part two" />
+                            <MenuItem value="Part three" primaryText="Part three" />
+                            <MenuItem value="Other" primaryText="Other" />
+
+                            </SelectField>
                     </Col>
                     <Col lg={6} style={styles.styleTableMap}>
+                        <TextField
+                            id="weapontype"
+                            placeholder="weapontype"
+                            onChange={this.handleChangeTextField}
+                            type="text"
+                        /><br/>
                         <TextField
                             id="domestic"
                             placeholder="domestic"
@@ -213,17 +211,6 @@ class AddCrime extends Component {
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
-                        <SelectField
-                            floatingLabelText="ucrpart"
-                            value={this.state.ucrpart}
-                            onChange={this.handleChangeUcrpart}
-                            >
-                            <MenuItem value="Part One" primaryText="Part one" />
-                            <MenuItem value="Part Two" primaryText="Part two" />
-                            <MenuItem value="Part three" primaryText="Part three" />
-                            <MenuItem value="Other" primaryText="Other" />
-
-                            </SelectField>
                         <TextField
                             id="streetname"
                             placeholder="streetname"
@@ -239,6 +226,18 @@ class AddCrime extends Component {
                         <TextField
                             id="location"
                             placeholder="location"
+                            onChange={this.handleChangeTextField}
+                            type="text"
+                        /><br/>
+                        <TextField
+                            id="reptdistrict"
+                            placeholder="reptdistrict"
+                            onChange={this.handleChangeTextField}
+                            type="text"
+                        /><br/>
+                        <TextField
+                            id="reportingarea"
+                            placeholder="reportingarea"
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
