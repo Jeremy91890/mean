@@ -19,7 +19,6 @@ import {blue500, blue600, red800, white} from 'material-ui/styles/colors';
 import HomePage from './Pages/HomePage.jsx'
 import AdminPage from './Pages/AdminPage.jsx'
 import LoginPage from './Pages/LoginPage.jsx'
-import SignInPage from './Pages/SignInPage.jsx'
 import NoMatchPage from './Pages/NoMatchPage.jsx'
 
 //http utils for request post, get ...
@@ -120,9 +119,17 @@ class Rooter extends Component {
                 />
             );
         }
+        const _AdminPage = (props) => {
+            return (
+                <AdminPage
+                    userRole={this.state.userRole}
+                    {...props}
+                />
+            );
+        }
         //check credentials for private page access
         var _HomePage = this.checkNormalPageAccess() ? HomePage : _LoginPage;
-        var _AdminPage = this.checkAdminPageAccess() ? AdminPage : _HomePage;
+        var __AdminPage = this.checkAdminPageAccess() ? _AdminPage : _HomePage;
 
         return (
             <Router>
@@ -148,7 +155,7 @@ class Rooter extends Component {
                     <div>
                         <Switch>
                             <Route exact path="/" component={_HomePage}/>
-                            <Route path="/admin" component={_AdminPage}/>
+                            <Route path="/admin" component={__AdminPage}/>
                             <Route component={_HomePage}/>
                         </Switch>
                     </div>

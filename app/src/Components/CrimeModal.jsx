@@ -53,7 +53,7 @@ class CrimeModal extends Component {
                         this.state.selectedCrimeFull != null
                         ?
                         <div>
-                            
+                        Affichage crime ici
                         </div>
                         :
                         <p>Probleme de chargement</p>

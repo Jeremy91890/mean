@@ -104,13 +104,18 @@ class CrimesMap extends Component {
     }
 
     processResponseGetCrimeById(resp) {
-        resp = resp.responseJSON;
-  
-        console.log(resp)
-          this.setState({
-            selectedCrimeFull: resp.crimes,
-            openCrimeModal: true
-        });
+        if (resp.responseJSON != undefined) {
+            resp = resp.responseJSON;
+            if (resp.success == true) {
+                this.setState({
+                    selectedCrimeFull: resp.crimes,
+                    openCrimeModal: true
+                });
+            }
+            else {
+                console.log(resp.message)
+            }
+        }       
     }
 /*
     onMapClicked(props) {

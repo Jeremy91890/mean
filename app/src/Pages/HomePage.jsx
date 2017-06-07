@@ -40,9 +40,15 @@ class HomePage extends Component {
     }
 
     processResponseGeHundredtLatestCrimes(resp) {
-        resp = resp.responseJSON;
-        this.setState({crimeToDisplay: resp.crimes});
-        console.log(resp)
+        if (resp.responseJSON != undefined) {
+            resp = resp.responseJSON;
+            if (resp.success == true) {
+                this.setState({crimeToDisplay: resp.crimes});
+            }
+            else {
+                console.log(resp.message)
+            }
+        }
     }
 
     onHandleCellSelectionCrime(key) {
