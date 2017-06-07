@@ -86,7 +86,7 @@ class CrimeModal extends Component {
         return (
             <div style={{overflow: 'auto'}}>
                  <Dialog style={styles.modalStyle}
-                    title={this.selectedCrimeFull.incident_type_description}
+                    title={this.state.selectedCrimeFull != null ? this.state.selectedCrimeFull.incident_type_description : "Error"}
                     modal={false}
                     open={this.state.openCrimeModal}
                     onRequestClose={this.handleCloseModal}

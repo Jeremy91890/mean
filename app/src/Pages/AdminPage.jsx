@@ -62,9 +62,11 @@ class AdminPage extends Component {
 
     loadAllValidatedUsers() {
         var API = API_IP + "/users/getAllUsersValidated/";
+         var token = localStorage.getItem('authToken');
         var headers = {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'};
+            'Content-Type': 'application/json',
+            'x-token': token};
         getData(API, headers, this.processResponseLoadAllValidatedUsers)
     }
 
@@ -84,9 +86,11 @@ class AdminPage extends Component {
 
     loadAllNonValidatedUsers() {
         var API = API_IP + "/users/getAllUsersNonValidated/";
+        var token = localStorage.getItem('authToken');
         var headers = {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'};
+            'Content-Type': 'application/json',
+            'x-token': token};
         getData(API, headers, this.processResponseLoadAllNonValidatedUsers)
     }
 
@@ -107,9 +111,11 @@ class AdminPage extends Component {
 
     deleteUserBtnClick(user) {
         var API = API_IP + "/users/deleteUser/";
+        var token = localStorage.getItem('authToken');
         var headers = {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'};
+            'Content-Type': 'application/json',
+            'x-token': token};
         var data = JSON.stringify({email: user.email});
         postData(API, headers, data, this.processResponseDeleteUser)
     }
@@ -140,9 +146,11 @@ class AdminPage extends Component {
 
     validateUserBtnClick(user) {
         var API = API_IP + "/users/validateUser/";
+        var token = localStorage.getItem('authToken');
         var headers = {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'};
+            'Content-Type': 'application/json',
+            'x-token': token};
         var data = JSON.stringify({email: user.email});
         postData(API, headers, data, this.processResponseValidateUser)
     }
@@ -178,7 +186,10 @@ class AdminPage extends Component {
                         this.state.allValidatedUsers != null
                         ?
                         <div>
-                            <Table>
+                            <div style={{width: '100%', textAlign: 'center'}}><h3>Utilisateurs validés</h3></div>
+                            <Table
+                                style={styles.styleTable}
+                            >
                                 <TableHeader
                                     displaySelectAll={false}
                                 >
@@ -211,28 +222,33 @@ class AdminPage extends Component {
                         {
                             this.state.allNonValidatedUsers != null
                             ?
-                            <Table>
-                                <TableHeader
-                                    displaySelectAll={false}
+                            <div>
+                                <div style={{width: '100%', textAlign: 'center'}}><h3>En attente de validation</h3></div>
+                                <Table
+                                    style={styles.styleTable}
                                 >
-                                    <TableRow>
-                                        <TableHeaderColumn>Email</TableHeaderColumn>
-                                        <TableHeaderColumn>Role</TableHeaderColumn>
-                                        <TableHeaderColumn>Action</TableHeaderColumn>
-                                    </TableRow>
-                                </TableHeader>
-                                <TableBody
-                                        displayRowCheckbox={false}
+                                    <TableHeader
+                                        displaySelectAll={false}
                                     >
-                                        {this.state.allNonValidatedUsers.map( (row, i) => (
-                                            <TableRow key={i} value={row.email}>
-                                                <TableRowColumn>{row.email}</TableRowColumn>
-                                                <TableRowColumn>{row.role}</TableRowColumn>
-                                                <TableRowColumn><FlatButton label="Valider" onTouchTap={this.validateUserBtnClick.bind(this, row)}/></TableRowColumn>
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                            </Table>
+                                        <TableRow>
+                                            <TableHeaderColumn>Email</TableHeaderColumn>
+                                            <TableHeaderColumn>Role</TableHeaderColumn>
+                                            <TableHeaderColumn>Action</TableHeaderColumn>
+                                        </TableRow>
+                                    </TableHeader>
+                                    <TableBody
+                                            displayRowCheckbox={false}
+                                        >
+                                            {this.state.allNonValidatedUsers.map( (row, i) => (
+                                                <TableRow key={i} value={row.email}>
+                                                    <TableRowColumn>{row.email}</TableRowColumn>
+                                                    <TableRowColumn>{row.role}</TableRowColumn>
+                                                    <TableRowColumn><FlatButton label="Valider" onTouchTap={this.validateUserBtnClick.bind(this, row)}/></TableRowColumn>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                </Table>
+                            </div>
                             :
                             <p>Aucun user</p>
                         }

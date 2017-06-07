@@ -34,9 +34,11 @@ class HomePage extends Component {
 
     geHundredtLatestCrimes(){
         var API = API_IP + "/crimes/geHundredtLatestCrimes";
+        var token = localStorage.getItem('authToken');
         var headers = {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'};
+            'Content-Type': 'application/json',
+            'x-token': token};
         getData(API, headers, this.processResponseGeHundredtLatestCrimes)
     }
 

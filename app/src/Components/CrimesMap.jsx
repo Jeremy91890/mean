@@ -100,9 +100,11 @@ class CrimesMap extends Component {
 
     getCrimeById(id){
         var API = API_IP + "/crimes/getCrime/" + id;
+        var token = localStorage.getItem('authToken');
         var headers = {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'};
+            'Content-Type': 'application/json',
+            'x-token': token};
         getData(API, headers, this.processResponseGetCrimeById)
     }
 

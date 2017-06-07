@@ -73,11 +73,12 @@ class Rooter extends Component {
     }
 
     logout(){
-        var token = localStorage.getItem('authToken');
         var API = API_IP + "/auth/deleteToken";
+        var token = localStorage.getItem('authToken');
         var headers = {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'};
+            'Content-Type': 'application/json',
+            'x-token': token};
         var data = JSON.stringify({"token":token});
         postData(API, headers, data , this.processResponseLogout)
         localStorage.setItem('authToken',null);
