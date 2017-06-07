@@ -26,7 +26,7 @@ const API_IP = api_ip_conf.endpoint;
 
 const styles = {
     styleMainRow: {
-        height: '100%',
+        height: '96%',
         marginLeft: 15,
         marginRight: 15,
     },
@@ -34,12 +34,14 @@ const styles = {
         overflow: 'auto',
         maxHeight: '100%',
         marginTop: 15,
+        padding: 0,
     },
     //en css
     styleCrimesMap: {
         width: '100%',
         height: '100%',
         marginTop: 15,
+        padding: 0,
     },
 }
 
