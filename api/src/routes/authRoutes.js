@@ -20,6 +20,16 @@ checkToken = function (token) {
     return false;
 };
 
+checkRole = function (token, role) {
+    for (var row in authorizedUsers) {
+        if (authorizedUsers[row].token == token) {
+            if (authorizedUsers[row].role <= role)
+                return true;
+        }
+    }
+    return false;
+}
+
 module.exports = function(app) {
 
     app.post('/auth/checkCredentials', function (req, res) {
