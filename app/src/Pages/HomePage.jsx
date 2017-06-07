@@ -23,57 +23,12 @@ class HomePage extends Component {
             userRole: props.userRole,
             crimeToDisplay: null,
         }
-        this.processResponseGeHundredtLatestCrimes = this.processResponseGeHundredtLatestCrimes.bind(this);
-
-        this.onHandleCellSelectionCrime = this.onHandleCellSelectionCrime.bind(this);
-    }
-
-    componentWillMount(){
-       this.geHundredtLatestCrimes();
-    }
-
-    geHundredtLatestCrimes(){
-        var API = API_IP + "/crimes/geHundredtLatestCrimes";
-        var token = localStorage.getItem('authToken');
-        var headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'x-token': token};
-        getData(API, headers, this.processResponseGeHundredtLatestCrimes)
-    }
-
-    processResponseGeHundredtLatestCrimes(resp) {
-        if (resp.responseJSON != undefined) {
-            resp = resp.responseJSON;
-            if (resp.success == true) {
-                this.setState({crimeToDisplay: resp.crimes});
-            }
-            else {
-                console.log(resp.message)
-            }
-        }
-    }
-
-    onHandleCellSelectionCrime(key) {
-        console.log(key);
-        console.log(this.state.crimeToDisplay[key]._id)
-        //Ici appel route get one crime by id
-        //renvoi dans un processResponce
-        //pour afficher modal crime avec info
     }
 
     render() {
         return (
             <div>
-                {
-                    this.state.crimeToDisplay != null
-                    ?
-                    <CrimesMap crimeToDisplay={this.state.crimeToDisplay}
-                        userRole={this.state.userRole}
-                    />
-                    :
-                    <p>Chargement</p>
-                }
+                <CrimesMap userRole={this.state.userRole}/>
             </div>
         )
     }

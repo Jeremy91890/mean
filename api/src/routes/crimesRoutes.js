@@ -121,7 +121,7 @@ module.exports = function(app) {
                     res.json({success: false, message: err});
                 else
                     res.json({success: true, crimes: crimes});
-            }).sort({'fromdate': -1});
+            }).sort({'fromdate': -1}).limit(500);
         }
     });
 

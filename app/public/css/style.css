@@ -1,13 +1,16 @@
-body {
+html, body {
     margin: 0px;
+    height: 100%;
+    background-color: #e8e8e8;
 }
 
 .container {
     margin: 0px;
+    height: 100%;
 }
 
 .containerMainRow {
-     height: 800px;
+     height: 90vh;
 }
 .styleTableMap {
      max-height: 100%;
