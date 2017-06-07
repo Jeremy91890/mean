@@ -39,6 +39,10 @@ const styles = {
       borderRadius: 5,
       position: 'absolute',
         top: -200,
+    },
+
+    cardStyle: {
+        backgroundColor: 'rgb(240, 240, 240)',
     }
 };
 
@@ -92,7 +96,7 @@ class CrimeModal extends Component {
                             showExpandableButton={true}
                             />
                             <CardText expandable={true}>
-                                <Table>
+                                <Table style={styles.cardStyle}>
                                     <TableHeader adjustForCheckbox={false} displaySelectAll={false} style={styles.tableHeader}>
                                         <TableRow>
                                             <TableRowColumn style={styles.tableRow}>
@@ -141,7 +145,7 @@ class CrimeModal extends Component {
                             showExpandableButton={true}
                             />
                             <CardText expandable={true}>
-                             <Table>
+                             <Table style={styles.cardStyle}>
                                 <TableHeader adjustForCheckbox={false} displaySelectAll={false} style={styles.tableHeader}>
                                     <TableRow>
                                         <TableRowColumn style={styles.tableRow}>
@@ -190,7 +194,7 @@ class CrimeModal extends Component {
                             showExpandableButton={true}
                             />
                             <CardText expandable={true}>
-                                <Table>
+                                <Table style={styles.cardStyle}>
 
                                     <TableHeader adjustForCheckbox={false} displaySelectAll={false} style={styles.tableHeader}>
                                         <TableRow>
@@ -241,6 +245,8 @@ class CrimeModal extends Component {
                                 </Table>
                             </CardText>
                         </Card>
+                        <br/>
+                        <RaisedButton label="EDIT" />
                         </div>
                         :
                         <p>Probleme de chargement</p>
