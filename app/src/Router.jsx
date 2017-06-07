@@ -127,9 +127,17 @@ class Rooter extends Component {
                 />
             );
         }
+        const _HomePage = (props) => {
+            return (
+                <HomePage
+                    userRole={this.state.userRole}
+                    {...props}
+                />
+            );
+        }
         //check credentials for private page access
-        var _HomePage = this.checkNormalPageAccess() ? HomePage : _LoginPage;
-        var __AdminPage = this.checkAdminPageAccess() ? _AdminPage : _HomePage;
+        var __HomePage = this.checkNormalPageAccess() ? _HomePage : _LoginPage;
+        var __AdminPage = this.checkAdminPageAccess() ? _AdminPage : __HomePage;
 
         return (
             <Router>
@@ -154,7 +162,7 @@ class Rooter extends Component {
                     }
                     <div>
                         <Switch>
-                            <Route exact path="/" component={_HomePage}/>
+                            <Route exact path="/" component={__HomePage}/>
                             <Route path="/admin" component={__AdminPage}/>
                             <Route component={_HomePage}/>
                         </Switch>

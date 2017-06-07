@@ -5,6 +5,16 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import {
+    Table,
+    TableBody,
+    TableFooter,
+    TableHeader,
+    TableHeaderColumn,
+    TableRow,
+    TableRowColumn,
+} from 'material-ui/Table';
+
 //http utils for request post, get ...
 import {postData, getData} from '../Utils/requestUtils.js';
 
@@ -14,7 +24,9 @@ import api_ip_conf from '../config.js';
 const API_IP = api_ip_conf.endpoint;
 
 const styles = {
-
+    TableBody: {
+        displayRowCheckbox: false,
+    },
 };
 
 class CrimeModal extends Component {
@@ -53,6 +65,24 @@ class CrimeModal extends Component {
                         this.state.selectedCrimeFull != null
                         ?
                         <div>
+                             <TableBody stripedRows >
+                                <TableRow>
+                                    <TableRowColumn>
+                                        naturecode
+                                    </TableRowColumn>
+                                    <TableRowColumn>
+                                       {this.state.selectedCrimeFull.naturecode}
+                                    </TableRowColumn>
+                                </TableRow>
+                                 <TableRow>
+                                    <TableRowColumn>
+                                        naturecode
+                                    </TableRowColumn>
+                                    <td>
+                                       {this.state.selectedCrimeFull.naturecode}
+                                    </td>
+                                </TableRow>
+                            </TableBody>
                         Affichage crime ici
                         </div>
                         :

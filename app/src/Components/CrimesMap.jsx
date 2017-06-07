@@ -45,6 +45,7 @@ class CrimesMap extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            userRole: props.userRole,
             crimeToDisplay: props.crimeToDisplay,
 
             selectedCrimeId: "",
@@ -59,7 +60,7 @@ class CrimesMap extends Component {
             }
         }
         console.log("props crime : ")
-        console.log(this.state.crimeToDisplay)
+        console.log(this.state.userRole)
         this.onMarkerClick = this.onMarkerClick.bind(this);
         //this.onMapClicked = this.onMapClicked.bind(this);
 
