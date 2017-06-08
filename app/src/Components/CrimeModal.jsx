@@ -74,14 +74,7 @@ class CrimeModal extends Component {
         console.log("a")
         this.setState({openCrimeModal: false});
     }
-
-    //Maj du state naturecode
-    handleChangeNaturecode(event) {
-        this.setState({
-            naturecode: event.target.value,
-        });
-    };
-
+    
     render() {
         return (
             <div style={{overflow: 'auto'}}>
