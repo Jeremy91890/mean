@@ -9,6 +9,7 @@ import {Container, Row, Col} from 'react-grid-system';
 import areIntlLocalesSupported from 'intl-locales-supported';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
 
 //http utils for request post, get ...
 import {postData, getData} from '../Utils/requestUtils.js';
@@ -34,8 +35,7 @@ const styles = {
         marginLeft: '25%',
         marginRight: '25%',
     },
-        styleTableMap: {
-        overflow: 'auto',
+        styleCol: {
         maxHeight: '100%',
         marginTop: 15,
     },
@@ -73,6 +73,8 @@ class AddCrime extends Component {
             month: "",
             day_week: "",
             ucrpart: "",
+            lat: "",
+            lng: "",
             streetname: "",
             xstreetname: "",
             location: ""
@@ -82,6 +84,9 @@ class AddCrime extends Component {
         this.handleChangeShooting = this.handleChangeShooting.bind(this);
         this.handleChangeDomestic = this.handleChangeDomestic.bind(this);
         this.handleChangeUcrpart = this.handleChangeUcrpart.bind(this);
+
+        this.onBtnAddCrimeClick = this.onBtnAddCrimeClick.bind(this);
+        this.processResponceAddCrime = this.processResponceAddCrime.bind(this);
 
 }
 
@@ -106,32 +111,69 @@ class AddCrime extends Component {
         this.setState({ucrpart: value});
     }
 
+    onBtnAddCrimeClick() {
+        var location = "(" + this.state.lat.toString() + ", " + this.state.lng.toString() + ")";
+        var API = API_IP + "/crimes/addCrime";
+        var token = localStorage.getItem('authToken');
+        var headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'x-token': token};
+        var data = JSON.stringify({
+            compnos: this.state.compnos,
+            naturecode: this.state.naturecode,
+            incident_type_description: this.state.incident_type_description,
+            main_crimecode: this.state.main_crimecode,
+            reptdistrict: this.state.reptdistrict,
+            reportingarea: this.state.reportingarea,
+            fromdate: this.state.fromdate,
+            weapontype: this.state.weapontype,
+            shooting: this.state.shooting,
+            domestic: this.state.domestic,
+            shift: this.state.shift,
+            year: this.state.year,
+            month: this.state.month,
+            day_week: this.state.day_week,
+            ucrpart: this.state.ucrpart,
+            x: this.state.lng,
+            y: this.state.lat,
+            streetname: this.state.streetname,
+            xstreetname: this.state.xstreetname,
+            location: location
+        });
+        postData(API, headers, data , this.processResponceAddCrime)
+    }
+
+    processResponceAddCrime(resp) {
+        console.log(resp);
+    }
+
     render() {
         return (
         <div>
             <Row style={styles.styleMainRow}>
-                    <Col lg={6} style={styles.styleTableMap}>
+                    <Col lg={6} style={styles.styleCol}>
                         <TextField
                             id="compnos"
-                            placeholder="compnos"
+                            hintText="compnos"
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
                         <TextField
                             id="naturecode"
-                            placeholder="naturecode"
+                            hintText="naturecode"
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
                         <TextField
                             id="incident_type_description"
-                            placeholder="incident_type_description"
+                            hintText="incident_type_description"
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
                         <TextField
                             id="main_crimecode"
-                            placeholder="main_crimecode"
+                            hintText="main_crimecode"
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
@@ -174,75 +216,84 @@ class AddCrime extends Component {
 
                             </SelectField>
                     </Col>
-                    <Col lg={6} style={styles.styleTableMap}>
+                    <Col lg={6} style={styles.styleCol}>
                         <TextField
                             id="weapontype"
-                            placeholder="weapontype"
+                            hintText="weapontype"
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
                         <TextField
                             id="domestic"
-                            placeholder="domestic"
+                            hintText="domestic"
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
                         <TextField
                             id="shift"
-                            placeholder="shift"
+                            hintText="shift"
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
                         <TextField
                             id="year"
-                            placeholder="year"
+                            hintText="year"
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
                         <TextField
                             id="month"
-                            placeholder="month"
+                            hintText="month"
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
                         <TextField
                             id="day_week"
-                            placeholder="day_week"
+                            hintText="day_week"
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
                         <TextField
                             id="streetname"
-                            placeholder="streetname"
+                            hintText="streetname"
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
                         <TextField
                             id="xstreetname"
-                            placeholder="xstreetname"
+                            hintText="xstreetname"
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
                         <TextField
-                            id="location"
-                            placeholder="location"
+                            id="lat"
+                            hintText="latitude"
                             onChange={this.handleChangeTextField}
-                            type="text"
+                            type="number"
+                        />
+                        <TextField
+                            id="lng"
+                            hintText="longitude"
+                            onChange={this.handleChangeTextField}
+                            type="number"
                         /><br/>
                         <TextField
                             id="reptdistrict"
-                            placeholder="reptdistrict"
+                            hintText="reptdistrict"
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
                         <TextField
                             id="reportingarea"
-                            placeholder="reportingarea"
+                            hintText="reportingarea"
                             onChange={this.handleChangeTextField}
                             type="text"
                         /><br/>
                     </Col>
                 </Row>
+                <div style={{width: '100%', textAlign: 'center'}}>
+                    <RaisedButton onTouchTap={this.onBtnAddCrimeClick} label="Ajouter"/>
+                </div>
         </div>
         )
     }

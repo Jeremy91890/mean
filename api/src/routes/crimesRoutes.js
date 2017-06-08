@@ -66,13 +66,13 @@ module.exports = function(app) {
             newCrime.xstreetname = req.body.xstreetname;
             newCrime.location = req.body.location;
             console.log(newCrime);
-
-            newCrime.save(function(err, data) {
+            res.json({success: true, message: newCrime.fromdate});
+            /*newCrime.save(function(err, data) {
                 if (err)
                     return (res.send(err))
                 res.json({success: true, message: data});
 
-            });
+            });*/
         }
     });
   
