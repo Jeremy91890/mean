@@ -75,7 +75,7 @@ module.exports = function(app) {
             });
         }
     });
-  
+
   //
   // Get 100 latest crimes
   //

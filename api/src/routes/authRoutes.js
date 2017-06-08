@@ -30,6 +30,15 @@ checkRole = function (token, role) {
     return false;
 }
 
+getMailByToken = function (token) {
+    for (var row in authorizedUsers) {
+        if (authorizedUsers[row].token == token) {
+            return authorizedUsers[row].email;
+        }
+    }
+    return ;
+};
+
 module.exports = function(app) {
 
     app.post('/auth/checkCredentials', function (req, res) {
@@ -45,11 +54,16 @@ module.exports = function(app) {
                 }
                 else {
                     // if user is found and password is right
-                    // create a token
-                    var token = createToken();
-                    authorizedUsers.push({token: token, email: user.email, role: user.role, validated: user.validated});
-                    // return the information including token as JSON
-                    res.json({success: true, token: token, role: user.role});
+                    // check if user is validated
+                    if (user.validated == true) {
+                        // create a token
+                        var token = createToken();
+                        authorizedUsers.push({token: token, email: user.email, role: user.role, validated: user.validated});
+                        // return the information including token as JSON
+                        res.json({success: true, token: token, role: user.role});
+                    }
+                    else
+                        res.json({success: false, message: 'Authentication failed. User not allowed.'});
                 }
             }
         });

@@ -120,16 +120,20 @@ module.exports = function(app) {
                 if (err)
                     res.json({success: false, message: err});
                 else {
-                    if (userToDel) {
-                        User.remove({ email: req.body.email }, function (err, userToDel) {
-                            if (err)
-                                res.json({success: false, message: err});
-                            else
-                                res.json({success: true, message: "User deleted"});
-                        });
+                    if (getMailByToken(req.headers['x-token']) == req.body.email)
+                        res.json({success: false, message: "Deleting yourself is not allowed"});
+                    else {
+                        if (userToDel) {
+                            User.remove({ email: req.body.email }, function (err, userToDel) {
+                                if (err)
+                                    res.json({success: false, message: err});
+                                else
+                                    res.json({success: true, message: "User deleted"});
+                            });
+                        }
+                        else
+                            res.json({success: false, message: "User not found"});
                     }
-                    else
-                        res.json({success: false, message: "User not found"});
                 }
                     
             });
