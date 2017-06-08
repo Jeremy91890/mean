@@ -27,7 +27,8 @@ var CrimeSchema = mongoose.Schema({
     y: Number,
     streetname: String,
     xstreetname: String,
-    location: String
+    location: String,
+    versionKey: false
 },
  {collection: 'crime_incident_reports'});
 var CrimeModel = mongoose.model('Crime', CrimeSchema);
@@ -38,7 +39,8 @@ var UserSchema = mongoose.Schema({
     email: String,
     password: String,
     role: Number,
-    validated: Boolean
+    validated: Boolean,
+    versionKey: false
 }, {collection: 'users'});
 var UserModel = mongoose.model('User', UserSchema);
 

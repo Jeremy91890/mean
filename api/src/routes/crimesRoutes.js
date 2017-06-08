@@ -45,7 +45,6 @@ module.exports = function(app) {
             var newCrime = Crime();
                 
             newCrime.compnos = req.body.compnos;
-            console.log(newCrime);
             newCrime.naturecode = req.body.naturecode;
             newCrime.incident_type_description = req.body.incident_type_description;
             newCrime.main_crimecode = req.body.main_crimecode;
@@ -65,6 +64,7 @@ module.exports = function(app) {
             newCrime.streetname = req.body.streetname;
             newCrime.xstreetname = req.body.xstreetname;
             newCrime.location = req.body.location;
+            console.log(newCrime)
             newCrime.save(function(err, data) {
                 if (err)
                     res.json({success: false, message: data});

@@ -271,13 +271,6 @@ class AddCrime extends Component {
                             value={this.state.weapontype}
                         /><br/>
                         <TextField
-                            id="domestic"
-                            hintText="domestic"
-                            onChange={this.handleChangeTextField}
-                            type="text"
-                            value={this.state.domestic}
-                        /><br/>
-                        <TextField
                             id="shift"
                             hintText="shift"
                             onChange={this.handleChangeTextField}
