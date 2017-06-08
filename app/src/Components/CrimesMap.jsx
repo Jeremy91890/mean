@@ -3,6 +3,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
 import ActionSearch from 'material-ui/svg-icons/action/search'
+import LocationSearching from 'material-ui/svg-icons/device/location-searching'
 import CircularProgress from 'material-ui/CircularProgress';
 import LinearProgress from 'material-ui/LinearProgress';
 
@@ -37,7 +38,7 @@ const styles = {
     },
     styleTableMap: {
         overflow: 'auto',
-        maxHeight: '100%',
+        maxHeight: '94%',
         marginTop: 15,
         padding: 0,
     },
@@ -78,7 +79,7 @@ class CrimesMap extends Component {
         this.processResponseGeHundredtLatestCrimes = this.processResponseGeHundredtLatestCrimes.bind(this);
         this.processResponseGetCrimeById = this.processResponseGetCrimeById.bind(this);
         
-        this.onHandleRowSelectionCrime = this.onHandleRowSelectionCrime.bind(this);
+        this.onHandleCellSelectionCrime = this.onHandleCellSelectionCrime.bind(this);
 
         this.btnSearchCrimeClick = this.btnSearchCrimeClick.bind(this);
         this.processResponseSearchCrimeByText = this.processResponseSearchCrimeByText.bind(this);
@@ -125,12 +126,14 @@ class CrimesMap extends Component {
         return lng;
     }
 
-    onMarkerClick(props, marker, e) {
-        console.log(props)
-        console.log("click mark")
-        this.getCrimeById(props.value);
+    extractDate(date) {
+        var eDate = date.split('T')[0];
+        return eDate;
     }
 
+    onMarkerClick(props, marker, e) {
+        this.getCrimeById(props.value);
+    }
 
     getCrimeById(id){
         var API = API_IP + "/crimes/getCrime/" + id;
@@ -157,17 +160,23 @@ class CrimesMap extends Component {
         }       
     }
 
-    onHandleRowSelectionCrime(key) {
+    onHandleCellSelectionCrime(key, cellNum) {
         console.log(key);
+        console.log(cellNum)
         var selectedCrime = this.state.crimeToDisplay[key]
-        this.setState({
-            openCrimeModal: false,
-            currentZoom: 20,
-            currentLocation: {
-                lat: this.extractLat(selectedCrime.location),
-                lng: this.extractLng(selectedCrime.location)
-            }
-        })
+        if (cellNum == 4) {
+            this.setState({
+                openCrimeModal: false,
+                currentZoom: 20,
+                currentLocation: {
+                    lat: this.extractLat(selectedCrime.location),
+                    lng: this.extractLng(selectedCrime.location)
+                }
+            })
+        }
+        else {
+            this.getCrimeById(selectedCrime._id)
+        }
         //Ici appel route get one crime by id
         //renvoi dans un processResponce
         //pour afficher modal crime avec info
@@ -175,15 +184,21 @@ class CrimesMap extends Component {
 
     btnSearchCrimeClick() {
         var value = document.getElementById("searchCrimeField").value;
-        this.setState({showLoading: true})
-        var API = API_IP + "/crimes/searchCrimeByText/";
-        var token = localStorage.getItem('authToken');
-        var headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'x-token': token};
-        var data = JSON.stringify({search: value});
-        postData(API, headers, data, this.processResponseSearchCrimeByText);
+        if (value != "") {
+            this.setState({showLoading: true})
+            var API = API_IP + "/crimes/searchCrimeByText/";
+            var token = localStorage.getItem('authToken');
+            var headers = {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'x-token': token};
+            var data = JSON.stringify({search: value});
+            postData(API, headers, data, this.processResponseSearchCrimeByText);
+        }
+        else {
+            this.geHundredtLatestCrimes();
+        }
+        
     }
 
     processResponseSearchCrimeByText(resp) {
@@ -192,9 +207,10 @@ class CrimesMap extends Component {
             resp = resp.responseJSON;
             console.log(resp);
             if (resp.success == true) {
-                this.setState({crimeToDisplay: resp.crimes})
+                this.setState({crimeToDisplay: resp.crimes, openCrimeModal: false})
             }
             else {
+                this.setState({openCrimeModal: false})
                 console.log(resp.message);
             }
         }
@@ -221,7 +237,7 @@ class CrimesMap extends Component {
                     <Row style={styles.styleMainRow}>
                         <Col lg={6} style={styles.styleTableMap}>
                             <Table
-                                onRowSelection={this.onHandleRowSelectionCrime}
+                                onCellClick={this.onHandleCellSelectionCrime}
                             >
                                 <TableHeader
                                     displaySelectAll={false}
@@ -231,6 +247,7 @@ class CrimesMap extends Component {
                                         <TableHeaderColumn>Description</TableHeaderColumn>
                                         <TableHeaderColumn>Weapon Type</TableHeaderColumn>
                                         <TableHeaderColumn>Date</TableHeaderColumn>
+                                        <TableHeaderColumn>Find</TableHeaderColumn>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody
@@ -241,7 +258,8 @@ class CrimesMap extends Component {
                                             <TableRowColumn>{row.naturecode}</TableRowColumn>
                                             <TableRowColumn>{row.incident_type_description}</TableRowColumn>
                                             <TableRowColumn>{row.weapontype}</TableRowColumn>
-                                            <TableRowColumn>{row.fromdate}</TableRowColumn>
+                                            <TableRowColumn>{this.extractDate(row.fromdate)}</TableRowColumn>
+                                            <TableRowColumn><IconButton><LocationSearching/></IconButton></TableRowColumn>
                                         </TableRow>
                                     ))}
                                 </TableBody>

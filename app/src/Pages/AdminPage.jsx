@@ -195,7 +195,6 @@ class AdminPage extends Component {
                                 >
                                     <TableRow>
                                         <TableHeaderColumn>Email</TableHeaderColumn>
-                                        <TableHeaderColumn>Password</TableHeaderColumn>
                                         <TableHeaderColumn>Role</TableHeaderColumn>
                                         <TableHeaderColumn>Action</TableHeaderColumn>
                                     </TableRow>
@@ -206,7 +205,6 @@ class AdminPage extends Component {
                                     {this.state.allValidatedUsers.map( (row, i) => (
                                         <TableRow key={i} value={row.email}>
                                             <TableRowColumn>{row.email}</TableRowColumn>
-                                            <TableRowColumn>{row.password}</TableRowColumn>
                                             <TableRowColumn>{row.role}</TableRowColumn>
                                             <TableRowColumn><FlatButton label="Supprimer" onTouchTap={this.deleteUserBtnClick.bind(this, row)}/></TableRowColumn>
                                         </TableRow>
