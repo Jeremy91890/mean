@@ -34,12 +34,12 @@ const API_IP = api_ip_conf.endpoint;
 const styles = {
     styleMainRow: {
         height: '100%',
-        marginLeft: '25%',
-        marginRight: '25%',
+        marginLeft: '10%',
+        marginRight: '10%',
     },
         styleCol: {
         maxHeight: '100%',
-        marginTop: 15,
+        paddingTop: 15,
     },
 };
 
@@ -69,18 +69,18 @@ class AddCrime extends Component {
             incident_type_description: "",
             main_crimecode: "",
             reptdistrict: "",
-            reportingarea: 42,
+            reportingarea: "",
             fromdate: null,
             weapontype: "",
             shooting: "",
             domestic: "",
             shift: "",
-            year: 2017,
-            month: 6,
+            year: "",
+            month: "",
             day_week: "",
             ucrpart: "",
-            lat: 42,
-            lng: 42,
+            lat: "",
+            lng: "",
             streetname: "",
             xstreetname: "",
             location: ""
@@ -168,17 +168,17 @@ class AddCrime extends Component {
                     incident_type_description: "",
                     main_crimecode: "",
                     reptdistrict: "",
-                    reportingarea: 42,
+                    reportingarea: "",
                     weapontype: "",
                     shooting: "",
                     domestic: "",
                     shift: "",
-                    year: 2017,
-                    month: 6,
+                    year: "",
+                    month: "",
                     day_week: "",
                     ucrpart: "",
-                    lat: 42,
-                    lng: 42,
+                    lat: "",
+                    lng: "",
                     streetname: "",
                     xstreetname: "",
                     location: ""
@@ -194,47 +194,57 @@ class AddCrime extends Component {
         return (
         <div>
             <Row style={styles.styleMainRow}>
-                    <Col lg={6} style={styles.styleCol}>
-                        <TextField
+                    <Col lg={3} style={styles.styleCol}>
+                    <h1>Identification</h1>
+                        <TextField 
                             id="compnos"
                             hintText="compnos"
                             onChange={this.handleChangeTextField}
                             type="text"
                             value={this.state.compnos}
-                        /><br/>
+                        />
                         <TextField
                             id="naturecode"
                             hintText="naturecode"
                             onChange={this.handleChangeTextField}
                             type="text"
                             value={this.state.naturecode}
-                        /><br/>
+                        />
                         <TextField
                             id="incident_type_description"
                             hintText="incident_type_description"
                             onChange={this.handleChangeTextField}
                             type="text"
                             value={this.state.incident_type_description}
-                        /><br/>
+                        />
                         <TextField
                             id="main_crimecode"
                             hintText="main_crimecode"
                             onChange={this.handleChangeTextField}
                             type="text"
                             value={this.state.main_crimecode}
-                        /><br/>
-                        <DatePicker
-                            id="fromdate"
-                            floatingLabelText="Fromdate"
-                            container="dialog"
-                            cancelLabel="Annuler"
-                            autoOk={true}
-                            DateTimeFormat={DateTimeFormat}
-                            locale="fr"
-                            onChange={this.handleChangeFromDate}
-                            value={this.state.fromdate}
                         />
-                         <SelectField
+                         <SelectField 
+                            floatingLabelText="ucrpart"
+                            value={this.state.ucrpart}
+                            onChange={this.handleChangeUcrpart}
+                            >
+                            <MenuItem value="Part One" primaryText="Part one" />
+                            <MenuItem value="Part Two" primaryText="Part two" />
+                            <MenuItem value="Part three" primaryText="Part three" />
+                            <MenuItem value="Other" primaryText="Other" />
+                            </SelectField>
+                    </Col>
+                    <Col lg={3} style={styles.styleCol}>
+                        <h1>Description</h1>
+                        <TextField
+                            id="weapontype"
+                            hintText="weapontype"
+                            onChange={this.handleChangeTextField}
+                            type="text"
+                            value={this.state.weapontype}
+                        />
+                        <SelectField
                             floatingLabelText="shooting"
                             value={this.state.shooting}
                             onChange={this.handleChangeShooting}
@@ -249,69 +259,76 @@ class AddCrime extends Component {
                             >
                             <MenuItem value={false} primaryText="No" />
                             <MenuItem value={true} primaryText="Yes" />
-                            </SelectField>
-                            <SelectField
-                            floatingLabelText="ucrpart"
-                            value={this.state.ucrpart}
-                            onChange={this.handleChangeUcrpart}
-                            >
-                            <MenuItem value="Part One" primaryText="Part one" />
-                            <MenuItem value="Part Two" primaryText="Part two" />
-                            <MenuItem value="Part three" primaryText="Part three" />
-                            <MenuItem value="Other" primaryText="Other" />
-
-                            </SelectField>
-                    </Col>
-                    <Col lg={6} style={styles.styleCol}>
+                        </SelectField>
+                        <br/> <br/>
                         <TextField
-                            id="weapontype"
-                            hintText="weapontype"
+                            id="reportingarea"
+                            hintText="reportingarea"
                             onChange={this.handleChangeTextField}
-                            type="text"
-                            value={this.state.weapontype}
-                        /><br/>
-                        <TextField
+                            type="number"
+                            value={this.state.reportingarea}
+                        />
+                    </Col>
+                    <Col lg={3} style={styles.styleCol}>
+                    <h1>Date</h1>
+                    <TextField
                             id="shift"
                             hintText="shift"
                             onChange={this.handleChangeTextField}
                             type="text"
                             value={this.state.shift}
-                        /><br/>
+                        />
+                        <DatePicker
+                            id="fromdate"
+                            floatingLabelText="Fromdate"
+                            container="dialog"
+                            cancelLabel="Annuler"
+                            autoOk={true}
+                            DateTimeFormat={DateTimeFormat}
+                            locale="fr"
+                            onChange={this.handleChangeFromDate}
+                            value={this.state.fromdate}
+                        />
                         <TextField
                             id="year"
                             hintText="year"
                             onChange={this.handleChangeTextField}
                             type="number"
                             value={this.state.year}
-                        /><br/>
+                        />
                         <TextField
                             id="month"
                             hintText="month"
                             onChange={this.handleChangeTextField}
                             type="number"
                             value={this.state.month}
-                        /><br/>
+                        />
                         <TextField
                             id="day_week"
                             hintText="day_week"
                             onChange={this.handleChangeTextField}
                             type="text"
                             value={this.state.day_week}
-                        /><br/>
+                        />
+                    </Col>
+                    <Col lg={3} style={styles.styleCol}>
+                        <h1>Place</h1>
                         <TextField
                             id="streetname"
                             hintText="streetname"
                             onChange={this.handleChangeTextField}
                             type="text"
                             value={this.state.streetname}
-                        /><br/>
+                        />
                         <TextField
                             id="xstreetname"
                             hintText="xstreetname"
                             onChange={this.handleChangeTextField}
                             type="text"
                             value={this.state.xstreetname}
-                        /><br/>
+                        />
+                        <br/>
+                        <br/>
                         <TextField
                             id="lat"
                             hintText="latitude"
@@ -325,21 +342,14 @@ class AddCrime extends Component {
                             onChange={this.handleChangeTextField}
                             type="number"
                             value={this.state.lng}
-                        /><br/>
+                        />
                         <TextField
                             id="reptdistrict"
                             hintText="reptdistrict"
                             onChange={this.handleChangeTextField}
                             type="text"
                             value={this.state.reptdistrict}
-                        /><br/>
-                        <TextField
-                            id="reportingarea"
-                            hintText="reportingarea"
-                            onChange={this.handleChangeTextField}
-                            type="number"
-                            value={this.state.reportingarea}
-                        /><br/>
+                        />
                     </Col>
                 </Row>
                 <div style={{width: '100%', textAlign: 'center'}}>
