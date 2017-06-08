@@ -67,8 +67,10 @@ module.exports = function(app) {
             newCrime.location = req.body.location;
             newCrime.save(function(err, data) {
                 if (err)
-                    return (res.send(err))
-                res.json({success: true, message: data});
+                    res.json({success: false, message: data});
+                else {
+                    res.json({success: true, message: data});
+                }
 
             });
         }
