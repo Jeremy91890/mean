@@ -155,8 +155,8 @@ class Rooter extends Component {
                                     <IconMenu iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}>
                                         <NavLink to="/"><MenuItem primaryText="Home"/></NavLink>
                                         {this.state.userRole == 0 ? <NavLink to="/admin"><MenuItem primaryText="Admin"/></NavLink> : null}
+                                        {this.state.userRole <= 1 ? <NavLink to="/addcrime"><MenuItem primaryText="Create" /></NavLink> : null}
                                         <NavLink to="/"><MenuItem primaryText="Logout" onTouchTap={this.logout}/></NavLink>
-                                        <NavLink to="/addcrime"><MenuItem primaryText="Create" /></NavLink>
                                     </IconMenu>
                                 }
                             />

@@ -65,14 +65,12 @@ module.exports = function(app) {
             newCrime.streetname = req.body.streetname;
             newCrime.xstreetname = req.body.xstreetname;
             newCrime.location = req.body.location;
-            console.log(newCrime);
-            res.json({success: true, message: newCrime.fromdate});
-            /*newCrime.save(function(err, data) {
+            newCrime.save(function(err, data) {
                 if (err)
                     return (res.send(err))
                 res.json({success: true, message: data});
 
-            });*/
+            });
         }
     });
   

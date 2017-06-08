@@ -10,6 +10,8 @@ import areIntlLocalesSupported from 'intl-locales-supported';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
+import Snackbar from 'material-ui/Snackbar';
+import {blue500, blue600, red800, white, green800} from 'material-ui/styles/colors';
 
 //http utils for request post, get ...
 import {postData, getData} from '../Utils/requestUtils.js';
@@ -58,27 +60,32 @@ class AddCrime extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            showSnackBar: false,
+            messageSnackBar: "",
+            colorSnackBar: red800,
+
             compnos: "",
             naturecode: "",
             incident_type_description: "",
             main_crimecode: "",
             reptdistrict: "",
-            reportingarea: "",
+            reportingarea: 42,
             fromdate: null,
             weapontype: "",
             shooting: "",
             domestic: "",
             shift: "",
-            year: "",
-            month: "",
+            year: 2017,
+            month: 6,
             day_week: "",
             ucrpart: "",
-            lat: "",
-            lng: "",
+            lat: 42,
+            lng: 42,
             streetname: "",
             xstreetname: "",
             location: ""
         }
+        this.handleRequestCloseSnackBar = this.handleRequestCloseSnackBar.bind(this);
         this.handleChangeTextField = this.handleChangeTextField.bind(this);
         this.handleChangeFromDate = this.handleChangeFromDate.bind(this);
         this.handleChangeShooting = this.handleChangeShooting.bind(this);
@@ -89,6 +96,13 @@ class AddCrime extends Component {
         this.processResponceAddCrime = this.processResponceAddCrime.bind(this);
 
 }
+
+    //Ferme la snackBar
+    handleRequestCloseSnackBar() {
+        this.setState({
+            showSnackBar: false,
+        });
+    };
 
     //Maj des states
     handleChangeTextField(event) {
@@ -145,7 +159,35 @@ class AddCrime extends Component {
     }
 
     processResponceAddCrime(resp) {
-        console.log(resp);
+        if (resp.responseJSON != undefined) {
+            resp = resp.responseJSON;
+            if (resp.success == true) {
+                this.setState({showSnackBar: true, messageSnackBar: "Crime ajouter", colorSnackBar: green800,
+                    compnos: "",
+                    naturecode: "",
+                    incident_type_description: "",
+                    main_crimecode: "",
+                    reptdistrict: "",
+                    reportingarea: 42,
+                    weapontype: "",
+                    shooting: "",
+                    domestic: "",
+                    shift: "",
+                    year: 2017,
+                    month: 6,
+                    day_week: "",
+                    ucrpart: "",
+                    lat: 42,
+                    lng: 42,
+                    streetname: "",
+                    xstreetname: "",
+                    location: ""
+                });
+            }
+            else {
+                this.setState({showSnackBar: true, messageSnackBar: resp.message, colorSnackBar: red800});
+            }
+        }
     }
 
     render() {
@@ -158,24 +200,28 @@ class AddCrime extends Component {
                             hintText="compnos"
                             onChange={this.handleChangeTextField}
                             type="text"
+                            value={this.state.compnos}
                         /><br/>
                         <TextField
                             id="naturecode"
                             hintText="naturecode"
                             onChange={this.handleChangeTextField}
                             type="text"
+                            value={this.state.naturecode}
                         /><br/>
                         <TextField
                             id="incident_type_description"
                             hintText="incident_type_description"
                             onChange={this.handleChangeTextField}
                             type="text"
+                            value={this.state.incident_type_description}
                         /><br/>
                         <TextField
                             id="main_crimecode"
                             hintText="main_crimecode"
                             onChange={this.handleChangeTextField}
                             type="text"
+                            value={this.state.main_crimecode}
                         /><br/>
                         <DatePicker
                             id="fromdate"
@@ -222,78 +268,97 @@ class AddCrime extends Component {
                             hintText="weapontype"
                             onChange={this.handleChangeTextField}
                             type="text"
+                            value={this.state.weapontype}
                         /><br/>
                         <TextField
                             id="domestic"
                             hintText="domestic"
                             onChange={this.handleChangeTextField}
                             type="text"
+                            value={this.state.domestic}
                         /><br/>
                         <TextField
                             id="shift"
                             hintText="shift"
                             onChange={this.handleChangeTextField}
                             type="text"
+                            value={this.state.shift}
                         /><br/>
                         <TextField
                             id="year"
                             hintText="year"
                             onChange={this.handleChangeTextField}
-                            type="text"
+                            type="number"
+                            value={this.state.year}
                         /><br/>
                         <TextField
                             id="month"
                             hintText="month"
                             onChange={this.handleChangeTextField}
-                            type="text"
+                            type="number"
+                            value={this.state.month}
                         /><br/>
                         <TextField
                             id="day_week"
                             hintText="day_week"
                             onChange={this.handleChangeTextField}
                             type="text"
+                            value={this.state.day_week}
                         /><br/>
                         <TextField
                             id="streetname"
                             hintText="streetname"
                             onChange={this.handleChangeTextField}
                             type="text"
+                            value={this.state.streetname}
                         /><br/>
                         <TextField
                             id="xstreetname"
                             hintText="xstreetname"
                             onChange={this.handleChangeTextField}
                             type="text"
+                            value={this.state.xstreetname}
                         /><br/>
                         <TextField
                             id="lat"
                             hintText="latitude"
                             onChange={this.handleChangeTextField}
                             type="number"
+                            value={this.state.lat}
                         />
                         <TextField
                             id="lng"
                             hintText="longitude"
                             onChange={this.handleChangeTextField}
                             type="number"
+                            value={this.state.lng}
                         /><br/>
                         <TextField
                             id="reptdistrict"
                             hintText="reptdistrict"
                             onChange={this.handleChangeTextField}
                             type="text"
+                            value={this.state.reptdistrict}
                         /><br/>
                         <TextField
                             id="reportingarea"
                             hintText="reportingarea"
                             onChange={this.handleChangeTextField}
-                            type="text"
+                            type="number"
+                            value={this.state.reportingarea}
                         /><br/>
                     </Col>
                 </Row>
                 <div style={{width: '100%', textAlign: 'center'}}>
                     <RaisedButton onTouchTap={this.onBtnAddCrimeClick} label="Ajouter"/>
                 </div>
+                <Snackbar
+                        open={this.state.showSnackBar}
+                        message={this.state.messageSnackBar}
+                        autoHideDuration={4000}
+                        onRequestClose={this.handleRequestCloseSnackBar}
+                        bodyStyle={{textAlign: "center", backgroundColor: this.state.colorSnackBar}}
+                />
         </div>
         )
     }
