@@ -43,8 +43,8 @@ const styles = {
     },
 
     buttonStyle: {
-        position: 'relative',
-        margin: 0,
+        width: '100%',
+        textAlign: 'right'
     },
 
     cardStyle: {
@@ -71,7 +71,6 @@ class CrimeModal extends Component {
     }
 
     handleCloseModal() {
-        console.log("a")
         this.setState({openCrimeModal: false});
     }
     
@@ -237,14 +236,14 @@ class CrimeModal extends Component {
                                                 </TableRowColumn>
                                             </TableRow> 
                                         </TableBody>
-                                </Table>
-                            </CardText>
-                        </Card>
-                        <br/>
-                        <br/>
-                         <div style={styles.buttonStyle}>
-                            <RaisedButton  label="EDIT" />
-                        </div>
+                                    </Table>
+                                </CardText>
+                            </Card>
+                            <br/>
+                            <br/>
+                            <div style={styles.buttonStyle}>
+                                <RaisedButton onTouchTap={this.props.btnClickDeleteCrime} label="Delete" />
+                            </div>
                         </div>
                         :
                         <p>Probleme de chargement</p>

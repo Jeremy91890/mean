@@ -83,6 +83,9 @@ class CrimesMap extends Component {
 
         this.btnSearchCrimeClick = this.btnSearchCrimeClick.bind(this);
         this.processResponseSearchCrimeByText = this.processResponseSearchCrimeByText.bind(this);
+
+        this.btnClickDeleteCrime = this.btnClickDeleteCrime.bind(this);
+        this.processResponceDeleteCrime = this.processResponceDeleteCrime.bind(this);
     }
 
     componentWillMount(){
@@ -216,6 +219,22 @@ class CrimesMap extends Component {
         }
     }
 
+    btnClickDeleteCrime() {
+        if (confirm("Supprimer ce crime ?")) {
+            var API = API_IP + "/crimes/deleteCrime/" + this.state.selectedCrimeFull._id;
+            var token = localStorage.getItem('authToken');
+            var headers = {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'x-token': token};
+            getData(API, headers, this.processResponceDeleteCrime);
+        }
+    }
+
+    processResponceDeleteCrime(resp) {
+        this.setState({openCrimeModal: false});
+        this.btnSearchCrimeClick();
+    }
 
     render() {
         var crimeToDisplay = this.state.crimeToDisplay;
@@ -282,7 +301,10 @@ class CrimesMap extends Component {
                                             onClick={this.onMarkerClick}>
                                         </Marker>
                                     ))}
-                                <CrimeModal selectedCrimeFull={this.state.selectedCrimeFull} openCrimeModal={this.state.openCrimeModal}/>
+                                <CrimeModal selectedCrimeFull={this.state.selectedCrimeFull}
+                                        openCrimeModal={this.state.openCrimeModal}
+                                        btnClickDeleteCrime={this.btnClickDeleteCrime}
+                                />
                             </Map>
                         </Col>
                     </Row>
