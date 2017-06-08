@@ -67,7 +67,7 @@ module.exports = function(app) {
             console.log(newCrime)
             newCrime.save(function(err, data) {
                 if (err)
-                    res.json({success: false, message: data});
+                    res.json({success: false, message: err});
                 else {
                     res.json({success: true, message: data});
                 }
@@ -75,7 +75,91 @@ module.exports = function(app) {
             });
         }
     });
-  
+
+    //
+    // DELETE Crime
+    //
+
+    app.get('/crimes/deleteCrime/:id', function (req, res) {
+        if (checkRole(req.headers['x-token'], 0) == false)
+            res.json({success: false, message: 'User unauthorized'});
+        else {
+            Crime.remove({_id: req.params.id}, function(err, data) {
+                if (err)
+                    res.json({success: false, message: err});
+                else {
+                    res.json({success: true, message: data});
+                }
+
+            });
+        }
+    });
+
+    //
+    // UPDATE Crime
+    //
+    /*
+    app.post('/crimes/updateCrime/:id', function (req, res) {
+        if (checkRole(req.headers['x-token'], 1) == false)
+            res.json({success: false, message: 'User unauthorized'});
+        else {
+            Crime.findById(req.params.id, function (err, crimeToUp) {
+                if (err)
+                    res.json({success: false, message: err});
+                else {
+                    if (req.body.compnos != "undefined")
+                        crimeToUp.compnos = req.body.compnos;
+                    if (req.body.naturecode != "undefined")
+                        crimeToUp.naturecode = req.body.naturecode;
+                    if (req.body.incident_type_description != "undefined")
+                        crimeToUp.incident_type_description = req.body.incident_type_description;
+                    if (req.body.main_crimecode != "undefined")
+                        crimeToUp.main_crimecode = req.body.main_crimecode;
+                    if (req.body.reptdistrict != "undefined")
+                        crimeToUp.reptdistrict = req.body.reptdistrict;
+                    if (req.body.reportingarea != "undefined")
+                        crimeToUp.reportingarea = req.body.reportingarea;
+                    if (req.body.fromdate != "undefined")
+                        crimeToUp.fromdate = req.body.fromdate;
+                    if (req.body.weapontype != "undefined")
+                        crimeToUp.weapontype = req.body.weapontype;
+                    if (req.body.shooting != "undefined")
+                        crimeToUp.shooting = req.body.shooting;
+                    if (req.body.domestic != "undefined")
+                        crimeToUp.domestic = req.body.domestic;
+                    if (req.body.shift != "undefined")
+                        crimeToUp.shift = req.body.shift;
+                    if (req.body.year != "undefined")
+                        crimeToUp.year = req.body.year;
+                    if (req.body.month != "undefined")
+                        crimeToUp.month = req.body.month;
+                    if (req.body.day_week != "undefined")
+                        crimeToUp.day_week = req.body.day_week;
+                    if (req.body.ucrpart != "undefined")
+                        crimeToUp.ucrpart = req.body.ucrpart;
+                    if (req.body.x != "undefined")
+                        crimeToUp.x = req.body.x;
+                    if (req.body.y != "undefined")
+                        crimeToUp.y = req.body.y;
+                    if (req.body.streetname != "undefined")
+                        crimeToUp.streetname = req.body.streetname;
+                    if (req.body.xstreetname != "undefined")
+                        crimeToUp.xstreetname = req.body.xstreetname;
+                    if (req.body.location != "undefined")
+                        crimeToUp.location = req.body.location;
+                    console.log(crimeToUp)
+                    crimeToUp.save(function(err, data) {
+                        if (err)
+                            res.json({success: false, message: err});
+                        else {
+                            res.json({success: true, message: data});
+                        }
+                    });
+                }
+            });
+        }
+    });*/
+
   //
   // Get 100 latest crimes
   //
