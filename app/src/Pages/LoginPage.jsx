@@ -58,8 +58,8 @@ class LoginPage extends Component {
             messageSnackBar: "",
             colorSnackBar: red800,
 
-            email: "ggi@etna.com",
-            password: "pass",
+            email: "",
+            password: "",
             displayLoadingProcessLogin: false,
 
             newEmail: "",
@@ -129,7 +129,7 @@ class LoginPage extends Component {
         if (resp.responseJSON != undefined) {
             resp = resp.responseJSON;
             if (resp.success == true) {
-                this.setState({showSnackBar: true, messageSnackBar: resp.message, colorSnackBar: green800, signIn: false});
+                this.setState({showSnackBar: true, messageSnackBar: resp.message, colorSnackBar: green800, signIn: false, newEmail: "", newPassword: "", newRole: 2});
             }
             else {
                 this.setState({showSnackBar: true, messageSnackBar: resp.message, colorSnackBar: red800});
@@ -201,7 +201,17 @@ class LoginPage extends Component {
     }
 
     createAccountBtnClick() {
-        this.createAccount();
+        if (this.validateEmail(this.state.newEmail) == true && this.state.newPassword != "") {
+            this.createAccount();
+        }
+        else {
+            this.setState({showSnackBar: true, messageSnackBar: "Un champ est invalide !", colorSnackBar: red800});
+        }
+    }
+
+    validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
     }
 
     backToLoginClick() {

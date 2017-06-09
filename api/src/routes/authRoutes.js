@@ -70,16 +70,20 @@ module.exports = function(app) {
     });
 
     app.post('/auth/deleteToken', function (req, res) {
+        var find = false;
         if (checkToken(req.headers['x-token']) == false)
             res.json({success: false, message: "User unauthorized"});
         else {
             for (var row in authorizedUsers) {
                 if (authorizedUsers[row].token == req.body.token) {
                     authorizedUsers.splice(row, 1);
+                    find = true;
                     res.json({success: true, message: "token deleted"});
                 }
             }
-            res.json({success: false, message: "token not exist"});
+            if (find == false) {
+                res.json({success: false, message: "token not exist"});
+            }
         }
     });
 };
